@@ -2,4 +2,5 @@
     <string name="app_name">P3BTubes1</string>
     <string name="welcome">Welcome!</string>
     <string name="start">Start</string>
+    <string name="addNew">+</string>
 </resources>
