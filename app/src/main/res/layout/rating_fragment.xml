@@ -10,84 +10,85 @@
         android:textAlignment="center"
         android:textSize="30dp"
         android:id="@+id/tvAddMovie"
-        android:text="Add a movie or series :">
+        android:text="JUDUL FILM">
     </TextView>
 
-    <RadioGroup
-        android:id="@+id/radioButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_below="@+id/tvAddMovie"
-        android:orientation="horizontal">
-        <RadioButton
-            android:id="@+id/rbMovie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Movie"
-            android:onClick="onRadioButtonClicked"/>
-        <RadioButton
-            android:id="@+id/rbSeries"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Series"
-            android:onClick="onRadioButtonClicked"/>
-    </RadioGroup>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/radioButton"
-        android:id="@+id/jumlahEpisodeSeries"
-        android:visibility="gone"
-        android:weightSum="1">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Number of episodes:"
-            android:textSize="20dp"
-            android:layout_weight="0.5">
-        </TextView>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:layout_weight="0.5">
-        </EditText>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/jumlahEpisodeSeries"
         android:id="@+id/layoutTitle"
         android:weightSum="1">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title :"
+            android:text="Status: waiting list"
             android:textSize="20dp"
             android:layout_weight="0.8">
         </TextView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:layout_weight="0.2">
+        </Button>
+    </LinearLayout>
 
-        <EditText
+    <RadioGroup
+        android:id="@+id/radioButtonStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutTitle"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/rbWaiting">
+        <RadioButton
+            android:id="@+id/rbWaiting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="waiting list"/>
+        <RadioButton
+            android:id="@+id/rbComplete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="complete"/>
+        <RadioButton
+            android:id="@+id/rbDropped"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dropped"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/radioButtonStatus"
+        android:id="@+id/episodeStatusLayout"
+        android:weightSum="1">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2">
-        </EditText>
-
+            android:text="Episode: "
+            android:textSize="20dp"
+            android:layout_weight="0.8">
+        </TextView>
+        <Spinner
+            android:id="@+id/episodeStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/radioButtonStatus"
+            android:spinnerMode="dropdown" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/layoutTitle"
+        android:layout_below="@+id/episodeStatusLayout"
+        android:background="@android:drawable/btn_dropdown"
         android:id="@+id/layoutSynopsis">
 
         <TextView
