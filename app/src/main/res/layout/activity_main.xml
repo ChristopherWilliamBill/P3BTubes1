@@ -1,13 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <FrameLayout
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:fitsSystemWindows="true">
+    <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragmentContainer"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="240dp"
         android:layout_height="match_parent"
-        android:id="@+id/fragmentContainer">
-    </FrameLayout>
-</RelativeLayout>
+        android:layout_gravity="start">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/NavigationFragment"
+            android:name="com.pppb.p3btubes1.NavigationFragment">
+        </fragment>
+    </RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
+
 
 

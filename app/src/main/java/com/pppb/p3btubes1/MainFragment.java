@@ -31,7 +31,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view == this.binding.startBtn){
-            Log.d("test", "dari MainFragment");
             presenter.createListFragment();
         }
     }

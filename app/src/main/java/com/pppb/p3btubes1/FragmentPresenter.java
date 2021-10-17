@@ -17,8 +17,13 @@ public class FragmentPresenter {
         fragmentManager = fm;
     }
 
+    public void createMainFragment(){
+        Bundle result = new Bundle();
+        result.putInt("page", 1);
+        fragmentManager.setFragmentResult("changePage", result);
+    }
+
     public void createListFragment(){
-        Log.d("test","dari FragmentPresenter");
         Bundle result = new Bundle();
         result.putInt("page", 2);
         fragmentManager.setFragmentResult("changePage", result);
