@@ -1,5 +1,6 @@
 package com.pppb.p3btubes1;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,17 @@ import androidx.fragment.app.Fragment;
 
 import com.pppb.p3btubes1.databinding.ListFragmentBinding;
 
+import java.util.ArrayList;
+
 public class ListFragment extends Fragment implements View.OnClickListener{
 
     private ListFragmentBinding binding;
     private MoviesAdapter adapter;
-    private ListPresenter presenter;
     private FragmentPresenter fragmentPresenter;
+    private Context context;
+    private StoragePresenter storagePresenter;
+    private ArrayList<Movies> arrMovies;
+
 
     public ListFragment(){
 
@@ -26,10 +32,13 @@ public class ListFragment extends Fragment implements View.OnClickListener{
         this.binding = ListFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         ListView listView = this.binding.lstMovie;
-        this.presenter = new ListPresenter();
-        this.adapter = new MoviesAdapter(getActivity(), this.presenter.movies, presenter);
         this.fragmentPresenter = new FragmentPresenter(getParentFragmentManager());
         binding.addButton.setOnClickListener(this);
+
+        this.context = getContext();
+
+        this.adapter = new MoviesAdapter(getActivity(), context);
+
         listView.setAdapter(adapter);
         return view;
     }

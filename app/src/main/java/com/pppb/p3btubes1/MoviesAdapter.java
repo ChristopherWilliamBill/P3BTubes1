@@ -1,6 +1,7 @@
 package com.pppb.p3btubes1;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,27 +18,40 @@ import java.util.List;
 
 public class MoviesAdapter extends BaseAdapter {
     private MoviesListBinding binding;
+    private StoragePresenter storagePresenter;
+    private ArrayList<Movies> arrMovies;
+    private Context context;
     private Activity activity;
-    private ListPresenter presenter;
 
-    public MoviesAdapter(Activity activity, ArrayList<Movies> movies, ListPresenter presenter){
+    public MoviesAdapter(Activity activity, Context context){
+        this.storagePresenter = new StoragePresenter();
         this.activity = activity;
-        this.presenter = presenter;
+        this.context = context;
+        this.arrMovies = new ArrayList<Movies>();
+        arrMovies.add(new Movies("Judul","Sinopsis",3));
+        this.arrMovies = storagePresenter.loadData(context);
     }
 
     @Override
     public int getCount() {
-        return presenter.movies.size();
+        this.arrMovies = storagePresenter.loadData(context);
+        return arrMovies.size();
     }
 
     @Override
     public Movies getItem(int i) {
-        return presenter.movies.get(i);
+        return arrMovies.get(i);
     }
 
     @Override
     public long getItemId(int i) {
         return 0;
+    }
+
+    public void addMovie(Movies movie){
+        this.arrMovies.add(movie);
+        notifyDataSetChanged();
+        this.storagePresenter.saveData(context, arrMovies);
     }
 
     @Override
@@ -48,7 +62,7 @@ public class MoviesAdapter extends BaseAdapter {
 
         if(convertView == null){
             convertView = binding.getRoot();
-            viewHolder = new ViewHolder(binding, i , presenter);
+            viewHolder = new ViewHolder(binding, i);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -60,12 +74,10 @@ public class MoviesAdapter extends BaseAdapter {
     private class ViewHolder{
         protected MoviesListBinding binding;
         private int i;
-        private ListPresenter lPresenter;
 
-        public ViewHolder(MoviesListBinding binding, int i, ListPresenter presenter){
+        public ViewHolder(MoviesListBinding binding, int i){
             this.binding = binding;
             this.i = i;
-            this.lPresenter = presenter;
         }
 
         public void updateView(Movies movie){

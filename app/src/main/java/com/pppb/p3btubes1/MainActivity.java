@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
             if(this.listFragment.isAdded()){
                 ft.hide(this.listFragment);
             }
+            if(this.addFragment.isAdded()){
+                ft.hide(this.addFragment);
+            }
         }else if(page == 2){
             if(this.listFragment.isAdded()){
                 ft.show(this.listFragment);
@@ -69,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
             }
             if(this.mainFragment.isAdded()){
                 ft.hide(this.mainFragment);
+            }
+            if(this.addFragment.isAdded()){
+                ft.hide(this.addFragment);
             }
         }else if(page == 3){
             if(this.addFragment.isAdded()){
