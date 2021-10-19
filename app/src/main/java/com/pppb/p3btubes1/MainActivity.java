@@ -1,5 +1,7 @@
 package com.pppb.p3btubes1;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,20 +9,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
 import com.pppb.p3btubes1.databinding.ActivityMainBinding;
-import com.pppb.p3btubes1.databinding.MainFragmentBinding;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements FragmentPresenter.IMainActivity{
 
     private ActivityMainBinding binding;
     private MainFragment mainFragment;
     private ListFragment listFragment;
+    private AddFragment addFragment;
     private FragmentPresenter presenter;
     private FragmentManager fragmentManager;
 
@@ -36,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
 
         this.listFragment = new ListFragment();
         this.mainFragment = new MainFragment();
+        this.addFragment = new AddFragment();
 
         this.fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
@@ -72,6 +69,18 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
             }
             if(this.mainFragment.isAdded()){
                 ft.hide(this.mainFragment);
+            }
+        }else if(page == 3){
+            if(this.addFragment.isAdded()){
+                ft.show(this.addFragment);
+            }else{
+                ft.add(this.binding.fragmentContainer.getId(), this.addFragment).addToBackStack(null);
+            }
+            if(this.mainFragment.isAdded()){
+                ft.hide(this.mainFragment);
+            }
+            if(this.listFragment.isAdded()){
+                ft.hide(this.listFragment);
             }
         }
         this.binding.drawerLayout.closeDrawers();
