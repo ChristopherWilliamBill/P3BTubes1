@@ -37,7 +37,7 @@ public class ListFragment extends Fragment implements View.OnClickListener{
 
         this.context = getContext();
 
-        this.adapter = new MoviesAdapter(getActivity(), context);
+        this.adapter = new MoviesAdapter(getActivity(), context, getParentFragmentManager());
 
         listView.setAdapter(adapter);
         return view;

@@ -33,7 +33,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
         this.binding.addBtnMovie.setOnClickListener(this);
         this.storagePresenter = new StoragePresenter();
         this.arrayList = storagePresenter.loadData(getContext());
-        moviesAdapter = new MoviesAdapter(getActivity(),getContext());
+        moviesAdapter = new MoviesAdapter(getActivity(),getContext(), getParentFragmentManager());
 
         return view;
     }
@@ -45,7 +45,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
         }else if(view == this.binding.rbSeries){
             this.binding.jumlahEpisodeSeries.setVisibility(View.VISIBLE);
         }else if(view == this.binding.addBtnMovie){
-            Movies movie = new Movies(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), 3);
+            Movies movie = new Movies(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), Integer.parseInt(this.binding.etRating.getText().toString()));
             moviesAdapter.addMovie(movie);
             presenter.createListFragment();
         }

@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
     private MainFragment mainFragment;
     private ListFragment listFragment;
     private AddFragment addFragment;
+    private DetailFragment detailFragment;
     private FragmentPresenter presenter;
     private FragmentManager fragmentManager;
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
         this.listFragment = new ListFragment();
         this.mainFragment = new MainFragment();
         this.addFragment = new AddFragment();
+        this.detailFragment = new DetailFragment(0);
 
         this.fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
@@ -44,6 +46,14 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 int page = result.getInt("page");
                 changePage(page);
+            }
+        });
+
+        this.getSupportFragmentManager().setFragmentResultListener("index", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                int index = result.getInt("index");
+                detailFragment = new DetailFragment(index);
             }
         });
 
@@ -64,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
             if(this.addFragment.isAdded()){
                 ft.hide(this.addFragment);
             }
+            if(this.detailFragment.isAdded()){
+                ft.hide(this.detailFragment);
+            }
         }else if(page == 2){
             if(this.listFragment.isAdded()){
                 ft.show(this.listFragment);
@@ -76,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
             if(this.addFragment.isAdded()){
                 ft.hide(this.addFragment);
             }
+            if(this.detailFragment.isAdded()){
+                ft.hide(this.detailFragment);
+            }
         }else if(page == 3){
             if(this.addFragment.isAdded()){
                 ft.show(this.addFragment);
@@ -87,6 +103,24 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
             }
             if(this.listFragment.isAdded()){
                 ft.hide(this.listFragment);
+            }
+            if(this.detailFragment.isAdded()){
+                ft.hide(this.detailFragment);
+            }
+        }else if(page == 4){
+            if(this.detailFragment.isAdded()){
+                ft.show(this.detailFragment);
+            }else{
+                ft.add(this.binding.fragmentContainer.getId(), this.detailFragment).addToBackStack(null);
+            }
+            if(this.mainFragment.isAdded()){
+                ft.hide(this.mainFragment);
+            }
+            if(this.listFragment.isAdded()){
+                ft.hide(this.listFragment);
+            }
+            if(this.addFragment.isAdded()){
+                ft.hide(this.addFragment);
             }
         }
         this.binding.drawerLayout.closeDrawers();

@@ -18,7 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvRating"
-        android:layout_weight="0.5"
-        android:text="Hai">
+        android:layout_weight="0.5">
     </TextView>
 </LinearLayout>
