@@ -30,6 +30,12 @@ public class FragmentPresenter {
         fragmentManager.setFragmentResult("changePage", result);
     }
 
+    public void createDetailFragment(){
+        Bundle result = new Bundle();
+        result.putInt("page", 4);
+        fragmentManager.setFragmentResult("changePage", result);
+    }
+
     public interface IMainActivity{
         void changePage(int page);
     }

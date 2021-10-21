@@ -7,14 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentManager;
 
-import com.pppb.p3btubes1.databinding.ActivityMainBinding;
-import com.pppb.p3btubes1.databinding.ListFragmentBinding;
 import com.pppb.p3btubes1.databinding.MoviesListBinding;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MoviesAdapter extends BaseAdapter {
     private MoviesListBinding binding;
@@ -71,17 +68,28 @@ public class MoviesAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private class ViewHolder{
+    private class ViewHolder implements View.OnClickListener{
         protected MoviesListBinding binding;
+        private FragmentPresenter fragmentPresenter;
+        private FragmentManager fm;
         private int i;
 
         public ViewHolder(MoviesListBinding binding, int i){
             this.binding = binding;
+            this.fragmentPresenter = new FragmentPresenter(fm);
             this.i = i;
+
         }
 
         public void updateView(Movies movie){
             this.binding.tvMovieTitle.setText(movie.getTitle());
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(view == this.binding.movie){
+                fragmentPresenter.createDetailFragment();
+            }
         }
     }
 }
