@@ -70,7 +70,6 @@ public class DatabasePresenter extends SQLiteOpenHelper {
         return cursor;
     }
 
-
     public ArrayList<Movies> loadMovie(){
         Cursor cursor = readAllMovie();
         ArrayList<Movies> arrayList= new ArrayList<>();

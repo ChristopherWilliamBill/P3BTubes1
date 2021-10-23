@@ -3,6 +3,7 @@ package com.pppb.p3btubes1;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.pppb.p3btubes1.databinding.ListFragmentBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListFragment extends Fragment implements View.OnClickListener, ListFragmentPresenter.Imovies{
 
@@ -29,8 +31,16 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
     public ListFragment(){
     }
 
+    public static ListFragment newInstance(){
+        ListFragment fragment = new ListFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        Log.d("test" , "oncreateview");
         this.binding = ListFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         ListView listView = this.binding.lstMovie;

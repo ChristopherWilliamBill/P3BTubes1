@@ -52,62 +52,43 @@ public class MoviesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(this.context).inflate(R.layout.movies_list, parent, false);
-        ViewHolder vh = new ViewHolder(convertView);
-        Movies current = this.getItem(i);
-        vh.updateView(current);
+        binding = MoviesListBinding.inflate(LayoutInflater.from(this.context), parent, false);
+        ViewHolder viewHolder;
+
+        if(convertView == null){
+            convertView = binding.getRoot();
+            viewHolder = new ViewHolder(binding, i , this.fm);
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        viewHolder.updateView(this.getItem(i));
 
         return convertView;
     }
 
-    private class ViewHolder{
-        protected TextView itemtitle;
+    private class ViewHolder implements View.OnClickListener{
+        protected MoviesListBinding binding;
+        private FragmentPresenter fragmentPresenter;
+        private int i;
 
-        public ViewHolder(View view){
-            this.itemtitle = view.findViewById(R.id.tvMovieTitle);
+        public ViewHolder(MoviesListBinding binding, int i, FragmentManager fm){
+            this.binding = binding;
+            this.fragmentPresenter = new FragmentPresenter(fm);
+            this.i = i;
+            this.binding.movie.setOnClickListener(this);
         }
 
-        public void updateView(final Movies movie){
-            this.itemtitle.setText(movie.getTitle());
+        public void updateView(Movies movie){
+            this.binding.tvMovieTitle.setText(movie.getTitle());
+            this.binding.tvRating.setText(movie.getRating() + "/5");
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(view == this.binding.movie){
+                fragmentPresenter.createDetailFragment(i);
+            }
         }
     }
-//        binding = MoviesListBinding.inflate(LayoutInflater.from(this.context),parent,false);
-//        ViewHolder viewHolder;
-//        if(convertView == null){
-//            convertView = binding.getRoot();
-//            viewHolder = new ViewHolder(binding, i, fm);
-//            convertView.setTag(viewHolder);
-//        }else{
-//            viewHolder = (ViewHolder) convertView.getTag();
-//        }
-//        viewHolder.updateView(this.getItem(i));
-//        return convertView;
-
-
-//    }
-
-//    private class ViewHolder implements View.OnClickListener{
-//        protected MoviesListBinding binding;
-//        private FragmentPresenter fragmentPresenter;
-//        private int i;
-//
-//        public ViewHolder(MoviesListBinding binding, int i, FragmentManager fm){
-//            this.binding = binding;
-//            this.fragmentPresenter = new FragmentPresenter(fm);
-//            this.i = i;
-//            this.binding.movie.setOnClickListener(this);
-//        }
-//
-//        public void updateView(Movies movie){
-//            this.binding.tvMovieTitle.setText(movie.getTitle());
-//            this.binding.tvRating.setText(movie.getRating() + "/5");
-//        }
-//
-//        @Override
-//        public void onClick(View view) {
-//            if(view == this.binding.movie){
-//                fragmentPresenter.createDetailFragment(i);
-//            }
-//        }
-//    }
 }

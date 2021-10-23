@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this,this.binding.drawerLayout,this.binding.toolbar,R.string.openDrawer,R.string.closeDrawer);
         abdt.syncState();
 
-        this.listFragment = new ListFragment();
+        this.listFragment = ListFragment.newInstance();
         this.mainFragment = new MainFragment();
         this.addFragment = new AddFragment();
         this.detailFragment = new DetailFragment(0);
@@ -63,67 +63,15 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
     public void changePage(int page) {
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
         if(page == 1){
-            if(this.mainFragment.isAdded()){
-                ft.show(this.mainFragment);
-            }else{
-                ft.add(this.binding.fragmentContainer.getId(), this.mainFragment);
-            }
-            if(this.listFragment.isAdded()){
-                ft.hide(this.listFragment);
-            }
-            if(this.addFragment.isAdded()){
-                ft.hide(this.addFragment);
-            }
-            if(this.detailFragment.isAdded()){
-                ft.hide(this.detailFragment);
-            }
+            ft.replace(this.binding.fragmentContainer.getId(), mainFragment).addToBackStack(null);
         }else if(page == 2){
-            if(this.listFragment.isAdded()){
-                ft.show(this.listFragment);
-            }else{
-                ft.add(this.binding.fragmentContainer.getId(), this.listFragment).addToBackStack(null);
-            }
-            if(this.mainFragment.isAdded()){
-                ft.hide(this.mainFragment);
-            }
-            if(this.addFragment.isAdded()){
-                ft.hide(this.addFragment);
-            }
-            if(this.detailFragment.isAdded()){
-                ft.hide(this.detailFragment);
-            }
+            ft.replace(this.binding.fragmentContainer.getId(), listFragment).addToBackStack(null);
         }else if(page == 3){
-            if(this.addFragment.isAdded()){
-                ft.show(this.addFragment);
-            }else{
-                ft.add(this.binding.fragmentContainer.getId(), this.addFragment).addToBackStack(null);
-            }
-            if(this.mainFragment.isAdded()){
-                ft.hide(this.mainFragment);
-            }
-            if(this.listFragment.isAdded()){
-                ft.hide(this.listFragment);
-            }
-            if(this.detailFragment.isAdded()){
-                ft.hide(this.detailFragment);
-            }
+            ft.replace(this.binding.fragmentContainer.getId(), addFragment).addToBackStack(null);
         }else if(page == 4){
-            if(this.detailFragment.isAdded()){
-                ft.show(this.detailFragment);
-            }else{
-                ft.add(this.binding.fragmentContainer.getId(), this.detailFragment).addToBackStack(null);
-            }
-            if(this.mainFragment.isAdded()){
-                ft.hide(this.mainFragment);
-            }
-            if(this.listFragment.isAdded()){
-                ft.hide(this.listFragment);
-            }
-            if(this.addFragment.isAdded()){
-                ft.hide(this.addFragment);
-            }
+            ft.replace(this.binding.fragmentContainer.getId(), detailFragment).addToBackStack(null);
         }
-        this.binding.drawerLayout.closeDrawers();
         ft.commit();
+        this.binding.drawerLayout.closeDrawers();
     }
 }
