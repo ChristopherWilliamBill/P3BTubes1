@@ -2,6 +2,7 @@ package com.pppb.p3btubes1;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -54,5 +55,16 @@ public class DatabasePresenter extends SQLiteOpenHelper {
         }else{
             Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    Cursor readAllMovie(){
+        String query = "SELECT * FROM" + TABLE_NAME_MOVIES;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            db.rawQuery(query, null);
+        }
+        return cursor;
     }
 }

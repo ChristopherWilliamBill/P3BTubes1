@@ -1,11 +1,13 @@
 package com.pppb.p3btubes1;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -21,7 +23,7 @@ public class ListFragment extends Fragment implements View.OnClickListener{
     private Context context;
     private StoragePresenter storagePresenter;
     private ArrayList<Movies> arrMovies;
-
+    private DatabasePresenter db;
 
     public ListFragment(){
 
@@ -38,11 +40,18 @@ public class ListFragment extends Fragment implements View.OnClickListener{
         this.context = getContext();
 
         this.adapter = new MoviesAdapter(getActivity(), context, getParentFragmentManager());
-
+        db = new DatabasePresenter(this.getContext());
+        arrMovies = new ArrayList<>();
         listView.setAdapter(adapter);
         return view;
     }
 
+    public void displayMovies(){
+        Cursor cursor = db.readAllMovie();
+        if(cursor.getCount() == 0 ){
+            Toast.makeText(this.getContext(), "No Movies!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onClick(View view) {
