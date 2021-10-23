@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DatabasePresenter extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "Movies.db";
@@ -57,14 +59,32 @@ public class DatabasePresenter extends SQLiteOpenHelper {
         }
     }
 
-    Cursor readAllMovie(){
-        String query = "SELECT * FROM" + TABLE_NAME_MOVIES;
+    public Cursor readAllMovie(){
+        String query = "SELECT * FROM " + TABLE_NAME_MOVIES;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
         if(db != null){
-            db.rawQuery(query, null);
+            cursor = db.rawQuery(query, null);
         }
         return cursor;
+    }
+
+
+    public ArrayList<Movies> loadMovie(){
+        Cursor cursor = readAllMovie();
+        ArrayList<Movies> arrayList= new ArrayList<>();
+        if(cursor.getCount() == 0){
+            Toast.makeText(this.context, "No Movies!", Toast.LENGTH_SHORT).show();
+        }else{
+            while(cursor.moveToNext()){
+                String title = (cursor.getString(1));
+                String synopsis = (cursor.getString(2));
+                int rating = (cursor.getInt(3));
+                Movies movies = new Movies(title,synopsis,rating);
+                arrayList.add(movies);
+            }
+        }
+        return arrayList;
     }
 }

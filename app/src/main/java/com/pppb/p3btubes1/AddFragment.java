@@ -17,9 +17,11 @@ import java.util.ArrayList;
 public class AddFragment extends Fragment implements View.OnClickListener{
     private AddFragmentBinding binding;
     private FragmentPresenter presenter;
+    private DatabasePresenter databasePresenter;
     private MoviesAdapter moviesAdapter;
     private StoragePresenter storagePresenter;
     private ArrayList<Movies> arrayList;
+    private MainActivity mainActivity;
 
     public AddFragment(){}
 
@@ -27,14 +29,15 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         this.binding = AddFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        mainActivity = new MainActivity();
         presenter = new FragmentPresenter(this.getParentFragmentManager());
         this.binding.rbMovie.setOnClickListener(this);
         this.binding.rbSeries.setOnClickListener(this);
         this.binding.addBtnMovie.setOnClickListener(this);
         this.storagePresenter = new StoragePresenter();
         this.arrayList = storagePresenter.loadData(getContext());
-        moviesAdapter = new MoviesAdapter(getActivity(),getContext(), getParentFragmentManager());
-
+        //moviesAdapter = new MoviesAdapter(getActivity(),getContext(), getParentFragmentManager());
+        this.databasePresenter = new DatabasePresenter(getContext());
         return view;
     }
 
@@ -46,7 +49,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
             this.binding.jumlahEpisodeSeries.setVisibility(View.VISIBLE);
         }else if(view == this.binding.addBtnMovie){
             Movies movie = new Movies(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), Integer.parseInt(this.binding.etRating.getText().toString()));
-            moviesAdapter.addMovie(movie);
+            databasePresenter.addMovie(movie.getTitle(), movie.getSynopsis(), movie.getRating());
             presenter.createListFragment();
         }
     }

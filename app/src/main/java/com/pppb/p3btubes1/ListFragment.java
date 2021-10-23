@@ -15,18 +15,18 @@ import com.pppb.p3btubes1.databinding.ListFragmentBinding;
 
 import java.util.ArrayList;
 
-public class ListFragment extends Fragment implements View.OnClickListener{
+public class ListFragment extends Fragment implements View.OnClickListener, ListFragmentPresenter.Imovies{
 
     private ListFragmentBinding binding;
     private MoviesAdapter adapter;
     private FragmentPresenter fragmentPresenter;
     private Context context;
     private StoragePresenter storagePresenter;
-    private ArrayList<Movies> arrMovies;
+    private ListFragmentPresenter listFragmentPresenter;
+//    private ArrayList<Movies> arrMovies;
     private DatabasePresenter db;
 
     public ListFragment(){
-
     }
 
     @Override
@@ -39,18 +39,13 @@ public class ListFragment extends Fragment implements View.OnClickListener{
 
         this.context = getContext();
 
-        this.adapter = new MoviesAdapter(getActivity(), context, getParentFragmentManager());
-        db = new DatabasePresenter(this.getContext());
-        arrMovies = new ArrayList<>();
-        listView.setAdapter(adapter);
-        return view;
-    }
+        this.db = new DatabasePresenter(this.getActivity());
+        this.listFragmentPresenter = new ListFragmentPresenter(this.db, this);
+        this.adapter = new MoviesAdapter(this.getActivity(), getParentFragmentManager());
 
-    public void displayMovies(){
-        Cursor cursor = db.readAllMovie();
-        if(cursor.getCount() == 0 ){
-            Toast.makeText(this.getContext(), "No Movies!", Toast.LENGTH_SHORT).show();
-        }
+        listView.setAdapter(this.adapter);
+        this.listFragmentPresenter.displayListMovie();
+        return view;
     }
 
     @Override
@@ -58,5 +53,21 @@ public class ListFragment extends Fragment implements View.OnClickListener{
         if (view == binding.addButton){
             fragmentPresenter.createAddFragment();
         }
+    }
+
+    @Override
+    public void updateMovie(ArrayList<Movies> movie) {
+        adapter.updateMovie(movie);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void detailMovie() {
+
+    }
+
+    @Override
+    public void addMovie() {
+
     }
 }
