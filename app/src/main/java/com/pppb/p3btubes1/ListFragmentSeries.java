@@ -9,16 +9,17 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
-import com.pppb.p3btubes1.databinding.ListFragmentBinding;
 import com.pppb.p3btubes1.databinding.ListFragmentSeriesBinding;
 
-public class ListFragmentSeries extends Fragment implements View.OnClickListener {
+import java.util.ArrayList;
+
+public class ListFragmentSeries extends Fragment implements View.OnClickListener , ListFragmentSeriesPresenter.Iseries{
 
     private ListFragmentSeriesBinding binding;
-    private FragmentPresenter fragmentPresenter;
-    //private SeriesAdapter adapter;
+    private SeriesAdapter adapter;
     private Context context;
-    private DatabasePresenter db;
+    private DatabaseSeries db;
+    private ListFragmentSeriesPresenter SeriesPresenter;
 
 
     public ListFragmentSeries(){
@@ -37,18 +38,38 @@ public class ListFragmentSeries extends Fragment implements View.OnClickListener
         this.binding = ListFragmentSeriesBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         ListView listView = this.binding.lstSeries;
-        this.fragmentPresenter = new FragmentPresenter(getParentFragmentManager());
+        this.SeriesPresenter = new ListFragmentSeriesPresenter(this.db, this);
         binding.addButtonSeries.setOnClickListener(this);
 
         this.context = getContext();
 
-        this.db = new DatabasePresenter(this.getActivity());
-        //this.listFragmentPresenter = new ListFragmentPresenter(this.db, this);
+        this.db = new DatabaseSeries(this.getActivity());
+        this.SeriesPresenter = new ListFragmentSeriesPresenter(this.db, this);
+        this.adapter = new SeriesAdapter(this.getActivity(), getParentFragmentManager());
+
+        listView.setAdapter(this.adapter);
+        this.SeriesPresenter.displayListSeries();
         return view;
     }
 
     @Override
     public void onClick(View view) {
+
+    }
+
+    @Override
+    public void updateSeries(ArrayList<Series> series) {
+        adapter.updateSeries(series);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void detailSeries() {
+
+    }
+
+    @Override
+    public void addSeries() {
 
     }
 }

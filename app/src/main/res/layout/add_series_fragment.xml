@@ -10,17 +10,41 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="30dp"
-        android:id="@+id/tvAddMovie"
+        android:id="@+id/tvAddSeries"
         android:text="Add a movie or series :">
     </TextView>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvAddSeries"
+        android:id="@+id/jumlahEpisodeSeries"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Number of episodes:"
+            android:textSize="20dp"
+            android:layout_weight="0.5">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/numEpisode"
+            android:inputType="number"
+            android:layout_weight="0.5">
+        </EditText>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layoutStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvAddMovie"
+        android:layout_below="@+id/jumlahEpisodeSeries"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -33,25 +57,25 @@
             android:textSize="20dp"></TextView>
 
         <RadioGroup
-            android:id="@+id/radioGroupStatus"
+            android:id="@+id/radioGroupStatusSeries"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/rbFinished"
+                android:id="@+id/rbFinishedSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="finished" />
 
             <RadioButton
-                android:id="@+id/rbDropped"
+                android:id="@+id/rbDroppedSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="dropped" />
 
             <RadioButton
-                android:id="@+id/rbWaiting"
+                android:id="@+id/rbWaitingSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="waiting list" />

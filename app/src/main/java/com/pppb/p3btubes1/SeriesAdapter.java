@@ -8,30 +8,30 @@ import android.widget.BaseAdapter;
 
 import androidx.fragment.app.FragmentManager;
 
-import com.pppb.p3btubes1.databinding.MoviesListBinding;
+import com.pppb.p3btubes1.databinding.SeriesListBinding;
 
 import java.util.ArrayList;
 
-public class MoviesAdapter extends BaseAdapter {
-    private MoviesListBinding binding;
-    private ArrayList<Movies> arrMovies;
+public class SeriesAdapter extends BaseAdapter {
+    private SeriesListBinding binding;
+    private ArrayList<Series> arrSeries;
     private Context context;
     private FragmentManager fm;
 
-    public MoviesAdapter(Context context, FragmentManager fm){
+    public SeriesAdapter(Context context, FragmentManager fm){
         this.context = context;
-        this.arrMovies = new ArrayList<>();
+        this.arrSeries = new ArrayList<>();
         this.fm = fm;
     }
 
     @Override
     public int getCount() {
-        return arrMovies.size();
+        return arrSeries.size();
     }
 
     @Override
-    public Movies getItem(int i) {
-        return arrMovies.get(i);
+    public Series getItem(int i) {
+        return arrSeries.get(i);
     }
 
     @Override
@@ -39,14 +39,14 @@ public class MoviesAdapter extends BaseAdapter {
         return 0;
     }
 
-    public void updateMovie(ArrayList<Movies> currentList){
-        this.arrMovies = currentList;
+    public void updateSeries(ArrayList<Series> currentSeries){
+        this.arrSeries = currentSeries;
         notifyDataSetChanged();
     }
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
-        binding = MoviesListBinding.inflate(LayoutInflater.from(this.context), parent, false);
+        binding = SeriesListBinding.inflate(LayoutInflater.from(this.context), parent, false);
         ViewHolder viewHolder;
 
         if(convertView == null){
@@ -62,32 +62,33 @@ public class MoviesAdapter extends BaseAdapter {
     }
 
     private class ViewHolder implements View.OnClickListener{
-        protected MoviesListBinding binding;
+        protected SeriesListBinding binding;
         private FragmentPresenter fragmentPresenter;
         private int i;
         private String temp;
-        private Movies currentMovie;
+        private Series currentSeries;
 
-        public ViewHolder(MoviesListBinding binding, int i, FragmentManager fm, Movies m){
+        public ViewHolder(SeriesListBinding binding, int i, FragmentManager fm, Series s){
             this.binding = binding;
             this.fragmentPresenter = new FragmentPresenter(fm);
             this.i = i;
             this.temp = "" + (i+1);
-            this.binding.movie.setOnClickListener(this);
-            this.currentMovie = m;
+            this.binding.series.setOnClickListener(this);
+            this.currentSeries = s;
         }
 
-        public void updateView(Movies movie){
-            this.binding.index.setText(temp + ". ");
-            this.binding.tvMovieTitle.setText(movie.getTitle());
-            this.binding.tvMovieStatus.setText(movie.getStatus());
-            this.binding.tvRating.setText(movie.getRating() + "/5");
+        public void updateView(Series series){
+            this.binding.indexSeries.setText(temp);
+            this.binding.tvSeriesTitle.setText(series.getTitle());
+            this.binding.tvSeriesStatus.setText(series.getStatus());
+            this.binding.tvSeriesRating.setText(series.getRating() + "/5");
+            this.binding.tvSeriesEpisode.setText(series.getEpisode());
         }
 
         @Override
         public void onClick(View view) {
-            if(view == this.binding.movie){
-                fragmentPresenter.createDetailFragment(currentMovie);
+            if(view == this.binding.series){
+                fragmentPresenter.createDetailFragmentSeries(currentSeries);
             }
         }
     }

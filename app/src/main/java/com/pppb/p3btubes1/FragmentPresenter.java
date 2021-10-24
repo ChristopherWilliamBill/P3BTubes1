@@ -48,6 +48,19 @@ public class FragmentPresenter {
         fragmentManager.setFragmentResult("changePage", result);
     }
 
+    public void createDetailFragmentSeries(Series series){
+        Bundle result = new Bundle();
+        result.putString("title" , series.getTitle());
+        result.putString("synopsis" , series.getSynopsis());
+        result.putInt("rating" , series.getRating());
+        result.putString("status" , series.getStatus());
+        result.putInt("episode", series.getEpisode());
+
+        result.putInt("page", 4);
+        fragmentManager.setFragmentResult("seriesDetail", result);
+        fragmentManager.setFragmentResult("changePage", result);
+    }
+
     public interface IMainActivity{
         void changePage(int page);
     }
