@@ -22,7 +22,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     private StoragePresenter storagePresenter;
     private ArrayList<Movies> arrayList;
     private MainActivity mainActivity;
-
+    private String status;
     public AddFragment(){}
 
     @Override
@@ -36,8 +36,25 @@ public class AddFragment extends Fragment implements View.OnClickListener{
         this.binding.addBtnMovie.setOnClickListener(this);
         this.storagePresenter = new StoragePresenter();
         this.arrayList = storagePresenter.loadData(getContext());
-        //moviesAdapter = new MoviesAdapter(getActivity(),getContext(), getParentFragmentManager());
         this.databasePresenter = new DatabasePresenter(getContext());
+
+        RadioGroup radioGroup = this.binding.radioGroupStatus;
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch(i){
+                    case R.id.rbDropped:
+                        status = "dropped";
+                        break;
+                    case R.id.rbFinished:
+                        status = "finished";
+                        break;
+                    case R.id.rbWaiting:
+                        status = "waiting list";
+                        break;
+                }
+            }
+        });
         return view;
     }
 
@@ -48,8 +65,8 @@ public class AddFragment extends Fragment implements View.OnClickListener{
         }else if(view == this.binding.rbSeries){
             this.binding.jumlahEpisodeSeries.setVisibility(View.VISIBLE);
         }else if(view == this.binding.addBtnMovie){
-            Movies movie = new Movies(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), Integer.parseInt(this.binding.etRating.getText().toString()));
-            databasePresenter.addMovie(movie.getTitle(), movie.getSynopsis(), movie.getRating());
+            Movies movie = new Movies(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), Integer.parseInt(this.binding.etRating.getText().toString()), status);
+            databasePresenter.addMovie(movie.getTitle(), movie.getSynopsis(), movie.getRating(), movie.getStatus());
             presenter.createListFragment();
         }
     }

@@ -1,6 +1,7 @@
 package com.pppb.p3btubes1;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
     private ActivityMainBinding binding;
     private MainFragment mainFragment;
     private ListFragment listFragment;
+    private ListFragmentSeries listFragmentSeries;
     private AddFragment addFragment;
     private DetailFragment detailFragment;
     private FragmentPresenter presenter;
@@ -32,9 +34,10 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
         abdt.syncState();
 
         this.listFragment = ListFragment.newInstance();
+        this.listFragmentSeries = ListFragmentSeries.newInstance();
         this.mainFragment = new MainFragment();
         this.addFragment = new AddFragment();
-        this.detailFragment = new DetailFragment(0);
+        //this.detailFragment = new DetailFragment(null);
 
         this.fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
@@ -49,11 +52,18 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
             }
         });
 
-        this.getSupportFragmentManager().setFragmentResultListener("index", this, new FragmentResultListener() {
+        this.getSupportFragmentManager().setFragmentResultListener("movieDetail", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                int index = result.getInt("index");
-                detailFragment = new DetailFragment(index);
+                String title = result.getString("title");
+                String synopsis = result.getString("synopsis");
+                int rating  = result.getInt("rating");
+                String status  = result.getString("status");
+
+
+                Movies currentMovie = new Movies(title,synopsis,rating, status);
+                detailFragment = new DetailFragment(currentMovie);
+                //Log.d("test", "" + index);
             }
         });
 
@@ -70,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
             ft.replace(this.binding.fragmentContainer.getId(), addFragment).addToBackStack(null);
         }else if(page == 4){
             ft.replace(this.binding.fragmentContainer.getId(), detailFragment).addToBackStack(null);
+        }else if(page == 5){
+            ft.replace(this.binding.fragmentContainer.getId(), listFragmentSeries).addToBackStack(null);
         }
         ft.commit();
         this.binding.drawerLayout.closeDrawers();

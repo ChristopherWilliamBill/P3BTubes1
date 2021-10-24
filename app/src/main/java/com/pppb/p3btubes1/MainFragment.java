@@ -25,6 +25,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         View view = binding.getRoot();
         presenter = new FragmentPresenter(this.getParentFragmentManager());
         binding.startBtn.setOnClickListener(this);
+        binding.startBtnSeries.setOnClickListener(this);
+
         return view;
     }
 
@@ -32,6 +34,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         if(view == this.binding.startBtn){
             presenter.createListFragment();
+        }else if(view == this.binding.startBtnSeries){
+            presenter.createListFragmentSeries();
         }
     }
 }

@@ -15,13 +15,35 @@
         android:layout_centerInParent="true">
     </TextView>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="what are you watching today?"
+        android:layout_marginTop="60dp"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_below="@id/welcome">
+    </TextView>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/startBtn"
-        android:text="@string/start"
+        android:text="Movie"
         android:layout_centerInParent="true">
     </Button>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/startBtnSeries"
+        android:text="Series"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/startBtn">
+    </Button>
+
+
 </RelativeLayout>
 
 

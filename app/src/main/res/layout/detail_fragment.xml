@@ -25,16 +25,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Status: waiting list"
+            android:id="@+id/status"
             android:textSize="20dp"
             android:layout_weight="0.8">
         </TextView>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit"
-            android:layout_weight="0.2">
-        </Button>
     </LinearLayout>
 
     <RadioGroup
@@ -53,7 +47,7 @@
             android:id="@+id/rbComplete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="complete"/>
+            android:text="finished"/>
         <RadioButton
             android:id="@+id/rbDropped"
             android:layout_width="wrap_content"

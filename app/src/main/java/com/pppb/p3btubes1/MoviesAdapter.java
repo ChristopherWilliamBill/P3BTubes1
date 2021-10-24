@@ -49,7 +49,6 @@ public class MoviesAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
         binding = MoviesListBinding.inflate(LayoutInflater.from(this.context), parent, false);
@@ -57,7 +56,7 @@ public class MoviesAdapter extends BaseAdapter {
 
         if(convertView == null){
             convertView = binding.getRoot();
-            viewHolder = new ViewHolder(binding, i , this.fm);
+            viewHolder = new ViewHolder(binding, i , this.fm, this.getItem(i));
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -71,23 +70,29 @@ public class MoviesAdapter extends BaseAdapter {
         protected MoviesListBinding binding;
         private FragmentPresenter fragmentPresenter;
         private int i;
+        private String temp;
+        private Movies currentMovie;
 
-        public ViewHolder(MoviesListBinding binding, int i, FragmentManager fm){
+        public ViewHolder(MoviesListBinding binding, int i, FragmentManager fm, Movies m){
             this.binding = binding;
             this.fragmentPresenter = new FragmentPresenter(fm);
             this.i = i;
+            this.temp = "" + (i+1);
             this.binding.movie.setOnClickListener(this);
+            this.currentMovie = m;
         }
 
         public void updateView(Movies movie){
+            this.binding.index.setText(temp);
             this.binding.tvMovieTitle.setText(movie.getTitle());
+            this.binding.tvMovieStatus.setText(movie.getStatus());
             this.binding.tvRating.setText(movie.getRating() + "/5");
         }
 
         @Override
         public void onClick(View view) {
             if(view == this.binding.movie){
-                fragmentPresenter.createDetailFragment(i);
+                fragmentPresenter.createDetailFragment(currentMovie);
             }
         }
     }

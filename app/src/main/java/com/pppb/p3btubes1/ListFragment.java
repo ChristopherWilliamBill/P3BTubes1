@@ -40,7 +40,6 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        Log.d("test" , "oncreateview");
         this.binding = ListFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         ListView listView = this.binding.lstMovie;

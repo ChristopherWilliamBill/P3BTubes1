@@ -30,11 +30,21 @@ public class FragmentPresenter {
         fragmentManager.setFragmentResult("changePage", result);
     }
 
-    public void createDetailFragment(int i){
+    public void createDetailFragment(Movies movie){
         Bundle result = new Bundle();
+        result.putString("title" , movie.getTitle());
+        result.putString("synopsis" , movie.getSynopsis());
+        result.putInt("rating" , movie.getRating());
+        result.putString("status" , movie.getStatus());
+
         result.putInt("page", 4);
-        result.putInt("index", i);
-        fragmentManager.setFragmentResult("index", result);
+        fragmentManager.setFragmentResult("movieDetail", result);
+        fragmentManager.setFragmentResult("changePage", result);
+    }
+
+    public void createListFragmentSeries() {
+        Bundle result = new Bundle();
+        result.putInt("page", 5);
         fragmentManager.setFragmentResult("changePage", result);
     }
 

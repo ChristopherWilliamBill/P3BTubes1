@@ -1,6 +1,7 @@
 package com.pppb.p3btubes1;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,15 @@ import java.util.ArrayList;
 
 public class DetailFragment extends Fragment{
     private DetailFragmentBinding binding;
-    private StoragePresenter storagePresenter;
+    //private StoragePresenter storagePresenter;
     private ArrayList<Movies> moviesArrayList;
     private int index;
+    private Movies currentMovie;
+    private DatabasePresenter databasePresenter;
 
-    public DetailFragment(int index){
-        this.storagePresenter = new StoragePresenter();
-        this.moviesArrayList = new ArrayList<Movies>();
-        this.index = index;
+    public DetailFragment(Movies currentMovie){
+        this.currentMovie = currentMovie;
+        //this.storagePresenter = new StoragePresenter();
     }
 
     @Override
@@ -28,9 +30,9 @@ public class DetailFragment extends Fragment{
         this.binding = DetailFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        this.moviesArrayList = storagePresenter.loadData(getContext());
+        this.binding.tvAddMovie.setText(this.currentMovie.getTitle());
+        this.binding.status.setText("Status: " + this.currentMovie.getStatus());
 
-        this.binding.tvAddMovie.setText(this.moviesArrayList.get(index).getTitle());
 
         return view;
     }
