@@ -6,13 +6,12 @@
     android:layout_marginTop="80dp">
 
     <TextView
+        android:id="@+id/tvAddMovie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="JUDUL FILM"
         android:textAlignment="center"
-        android:textSize="30dp"
-        android:id="@+id/tvAddMovie"
-        android:text="JUDUL FILM">
-    </TextView>
+        android:textSize="30dp"></TextView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,8 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layoutTitle"
-        android:orientation="horizontal"
-        android:checkedButton="@+id/rbWaiting">
+        android:orientation="horizontal">
         <RadioButton
             android:id="@+id/rbWaiting"
             android:layout_width="wrap_content"
@@ -60,30 +58,36 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/radioButtonStatus"
-        android:id="@+id/episodeStatusLayout"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/layoutRating">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Episode: "
-            android:textSize="20dp"
-            android:layout_weight="0.8">
+            android:layout_weight="0.7"
+            android:text="Rating (1-5):"
+            android:textSize="20dp">
         </TextView>
-        <Spinner
-            android:id="@+id/episodeStatus"
+
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/radioButtonStatus"
-            android:spinnerMode="dropdown" />
+            android:layout_weight="0.3"
+            android:id="@+id/etRating"
+            android:inputType="number"
+            android:maxLength="1"
+            android:digits="12345">
+        </EditText>
+
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/episodeStatusLayout"
-        android:background="@android:drawable/btn_dropdown"
+        android:layout_below="@+id/layoutRating"
         android:id="@+id/layoutSynopsis">
 
         <TextView
@@ -94,6 +98,7 @@
         </TextView>
 
         <EditText
+            android:id="@+id/detailSynopsis"
             android:layout_width="match_parent"
             android:layout_height="200dp">
         </EditText>
@@ -104,9 +109,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:textSize="30dp"
-        android:text="@string/addNew"
-        android:id="@+id/addBtnMovie"
+        android:text="save changes"
+        android:id="@+id/saveChangesMovie"
         android:layout_margin="10dp">
     </Button>
 

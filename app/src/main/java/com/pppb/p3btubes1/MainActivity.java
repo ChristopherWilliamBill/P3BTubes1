@@ -1,7 +1,6 @@
 package com.pppb.p3btubes1;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.pppb.p3btubes1.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements FragmentPresenter.IMainActivity{
+public class MainActivity extends AppCompatActivity implements FragmentCreate.IMainActivity{
 
     private ActivityMainBinding binding;
     private MainFragment mainFragment;
@@ -20,7 +19,8 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
     private ListFragmentSeries listFragmentSeries;
     private AddFragment addFragment;
     private DetailFragment detailFragment;
-    private FragmentPresenter presenter;
+    private AddSeriesFragment addSeriesFragment;
+    private FragmentCreate presenter;
     private FragmentManager fragmentManager;
 
     @Override
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
         this.listFragmentSeries = ListFragmentSeries.newInstance();
         this.mainFragment = new MainFragment();
         this.addFragment = new AddFragment();
+        this.addSeriesFragment = AddSeriesFragment.newInstance();
+
         //this.detailFragment = new DetailFragment(null);
 
         this.fragmentManager = this.getSupportFragmentManager();
@@ -59,10 +61,10 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
                 String synopsis = result.getString("synopsis");
                 int rating  = result.getInt("rating");
                 String status  = result.getString("status");
-
+                int index = result.getInt("index");
 
                 Movies currentMovie = new Movies(title,synopsis,rating, status);
-                detailFragment = new DetailFragment(currentMovie);
+                detailFragment = new DetailFragment(currentMovie, index);
                 //Log.d("test", "" + index);
             }
         });
@@ -82,6 +84,10 @@ public class MainActivity extends AppCompatActivity implements FragmentPresenter
             ft.replace(this.binding.fragmentContainer.getId(), detailFragment).addToBackStack(null);
         }else if(page == 5){
             ft.replace(this.binding.fragmentContainer.getId(), listFragmentSeries).addToBackStack(null);
+        }else if(page == 6){
+            //ft.replace(this.binding.fragmentContainer.getId(), ).addToBackStack(null);
+        }else if(page == 7){
+            ft.replace(this.binding.fragmentContainer.getId(), addSeriesFragment).addToBackStack(null);
         }
         ft.commit();
         this.binding.drawerLayout.closeDrawers();

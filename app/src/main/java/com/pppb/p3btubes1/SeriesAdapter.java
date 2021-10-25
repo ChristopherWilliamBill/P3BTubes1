@@ -63,14 +63,14 @@ public class SeriesAdapter extends BaseAdapter {
 
     private class ViewHolder implements View.OnClickListener{
         protected SeriesListBinding binding;
-        private FragmentPresenter fragmentPresenter;
+        private FragmentCreate fragmentPresenter;
         private int i;
         private String temp;
         private Series currentSeries;
 
         public ViewHolder(SeriesListBinding binding, int i, FragmentManager fm, Series s){
             this.binding = binding;
-            this.fragmentPresenter = new FragmentPresenter(fm);
+            this.fragmentPresenter = new FragmentCreate(fm);
             this.i = i;
             this.temp = "" + (i+1);
             this.binding.series.setOnClickListener(this);
@@ -82,7 +82,6 @@ public class SeriesAdapter extends BaseAdapter {
             this.binding.tvSeriesTitle.setText(series.getTitle());
             this.binding.tvSeriesStatus.setText(series.getStatus());
             this.binding.tvSeriesRating.setText(series.getRating() + "/5");
-            this.binding.tvSeriesEpisode.setText(series.getEpisode());
         }
 
         @Override

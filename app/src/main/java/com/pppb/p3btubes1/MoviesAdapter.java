@@ -63,14 +63,14 @@ public class MoviesAdapter extends BaseAdapter {
 
     private class ViewHolder implements View.OnClickListener{
         protected MoviesListBinding binding;
-        private FragmentPresenter fragmentPresenter;
+        private FragmentCreate fragmentPresenter;
         private int i;
         private String temp;
         private Movies currentMovie;
 
         public ViewHolder(MoviesListBinding binding, int i, FragmentManager fm, Movies m){
             this.binding = binding;
-            this.fragmentPresenter = new FragmentPresenter(fm);
+            this.fragmentPresenter = new FragmentCreate(fm);
             this.i = i;
             this.temp = "" + (i+1);
             this.binding.movie.setOnClickListener(this);
@@ -81,13 +81,15 @@ public class MoviesAdapter extends BaseAdapter {
             this.binding.index.setText(temp + ". ");
             this.binding.tvMovieTitle.setText(movie.getTitle());
             this.binding.tvMovieStatus.setText(movie.getStatus());
-            this.binding.tvRating.setText(movie.getRating() + "/5");
+            if(movie.getRating() != 0){
+                this.binding.tvRating.setText(movie.getRating() + "/5");
+            }
         }
 
         @Override
         public void onClick(View view) {
             if(view == this.binding.movie){
-                fragmentPresenter.createDetailFragment(currentMovie);
+                fragmentPresenter.createDetailFragment(currentMovie, i);
             }
         }
     }

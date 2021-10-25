@@ -1,16 +1,13 @@
 package com.pppb.p3btubes1;
 
-import android.content.Context;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListFragmentPresenter {
     private ArrayList<Movies> movie;
-    private DatabasePresenter db;
+    private DatabaseMovie db;
     public Imovies ui;
 
-    public ListFragmentPresenter(DatabasePresenter db, Imovies ui){
+    public ListFragmentPresenter(DatabaseMovie db, Imovies ui){
         this.movie = new ArrayList<>();
         this.db = db;
         this.ui = ui;

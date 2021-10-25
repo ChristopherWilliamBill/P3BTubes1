@@ -4,11 +4,11 @@ import android.os.Bundle;
 
 import androidx.fragment.app.FragmentManager;
 
-public class FragmentPresenter {
+public class FragmentCreate {
 
     private FragmentManager fragmentManager;
 
-    public FragmentPresenter(FragmentManager fm){
+    public FragmentCreate(FragmentManager fm){
         fragmentManager = fm;
     }
 
@@ -30,11 +30,12 @@ public class FragmentPresenter {
         fragmentManager.setFragmentResult("changePage", result);
     }
 
-    public void createDetailFragment(Movies movie){
+    public void createDetailFragment(Movies movie, int i){
         Bundle result = new Bundle();
         result.putString("title" , movie.getTitle());
         result.putString("synopsis" , movie.getSynopsis());
         result.putInt("rating" , movie.getRating());
+        result.putInt("index" , i);
         result.putString("status" , movie.getStatus());
 
         result.putInt("page", 4);
@@ -56,8 +57,14 @@ public class FragmentPresenter {
         result.putString("status" , series.getStatus());
         result.putInt("episode", series.getEpisode());
 
-        result.putInt("page", 4);
+        result.putInt("page", 6);
         fragmentManager.setFragmentResult("seriesDetail", result);
+        fragmentManager.setFragmentResult("changePage", result);
+    }
+
+    public void createAddSeriesFragment(){
+        Bundle result = new Bundle();
+        result.putInt("page", 7);
         fragmentManager.setFragmentResult("changePage", result);
     }
 

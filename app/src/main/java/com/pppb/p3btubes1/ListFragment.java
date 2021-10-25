@@ -1,32 +1,28 @@
 package com.pppb.p3btubes1;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.pppb.p3btubes1.databinding.ListFragmentBinding;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListFragment extends Fragment implements View.OnClickListener, ListFragmentPresenter.Imovies{
 
     private ListFragmentBinding binding;
     private MoviesAdapter adapter;
-    private FragmentPresenter fragmentPresenter;
+    private FragmentCreate fragmentPresenter;
     private Context context;
     private StoragePresenter storagePresenter;
     private ListFragmentPresenter listFragmentPresenter;
 //    private ArrayList<Movies> arrMovies;
-    private DatabasePresenter db;
+    private DatabaseMovie db;
 
     public ListFragment(){
     }
@@ -43,12 +39,12 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
         this.binding = ListFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         ListView listView = this.binding.lstMovie;
-        this.fragmentPresenter = new FragmentPresenter(getParentFragmentManager());
+        this.fragmentPresenter = new FragmentCreate(getParentFragmentManager());
         binding.addButton.setOnClickListener(this);
 
         this.context = getContext();
 
-        this.db = new DatabasePresenter(this.getActivity());
+        this.db = new DatabaseMovie(this.getActivity());
         this.listFragmentPresenter = new ListFragmentPresenter(this.db, this);
         this.adapter = new MoviesAdapter(this.getActivity(), getParentFragmentManager());
 

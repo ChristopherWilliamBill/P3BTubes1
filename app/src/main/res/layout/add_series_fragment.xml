@@ -11,15 +11,40 @@
         android:textAlignment="center"
         android:textSize="30dp"
         android:id="@+id/tvAddSeries"
-        android:text="Add a movie or series :">
+        android:text="Add a series:">
     </TextView>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/tvAddSeries"
+        android:id="@+id/layoutTitleSeries"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title :"
+            android:textSize="20dp"
+            android:layout_weight="0.8">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/etTitle"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2">
+        </EditText>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/layoutTitleSeries"
         android:id="@+id/jumlahEpisodeSeries"
         android:weightSum="1">
 
@@ -66,52 +91,39 @@
                 android:id="@+id/rbFinishedSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="12dp"
                 android:text="finished" />
 
             <RadioButton
                 android:id="@+id/rbDroppedSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="12dp"
                 android:text="dropped" />
 
             <RadioButton
                 android:id="@+id/rbWaitingSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="12dp"
                 android:text="waiting list" />
+
+            <RadioButton
+                android:id="@+id/rbOngoing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:text="ongoing" />
         </RadioGroup>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/layoutStatus"
-        android:id="@+id/layoutTitle"
-        android:weightSum="1">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Title :"
-            android:textSize="20dp"
-            android:layout_weight="0.8">
-        </TextView>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:id="@+id/etTitle"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2">
-        </EditText>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/layoutTitle"
+        android:layout_below="@+id/layoutStatus"
         android:id="@+id/layoutRating">
 
         <TextView
@@ -159,7 +171,7 @@
         android:layout_alignParentBottom="true"
         android:textSize="30dp"
         android:text="@string/addNew"
-        android:id="@+id/addBtnMovie"
+        android:id="@+id/addBtnSeries"
         android:layout_margin="10dp">
     </Button>
 

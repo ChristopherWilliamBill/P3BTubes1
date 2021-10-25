@@ -5,13 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class DatabasePresenter extends SQLiteOpenHelper {
+public class DatabaseMovie extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "Movies.db";
     private static final int DATABASE_VERSION = 1;
@@ -24,7 +25,7 @@ public class DatabasePresenter extends SQLiteOpenHelper {
     private static final String COLUMN_STATUS = "status";
 
 
-    public DatabasePresenter(@Nullable Context context){
+    public DatabaseMovie(@Nullable Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -73,6 +74,22 @@ public class DatabasePresenter extends SQLiteOpenHelper {
             cursor = db.rawQuery(query, null);
         }
         return cursor;
+    }
+
+    public void updateMovie(String status, String synopsis, int rating, String id){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_STATUS, status);
+        cv.put(COLUMN_SYNOPSIS, synopsis);
+        cv.put(COLUMN_RATING, rating);
+        Log.d("test", "" + id);
+
+        long result = db.update(TABLE_NAME_MOVIES, cv, "id = ?", new String[]{id});
+        if(result == -1){
+            Toast.makeText(context, "Failed to update!", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully updated!", Toast.LENGTH_SHORT).show();
+        }
     }
 
 //    public Cursor readCurrentMovie(int index){

@@ -1,6 +1,7 @@
 package com.pppb.p3btubes1;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +9,13 @@ import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.pppb.p3btubes1.databinding.AddFragmentBinding;
+import com.pppb.p3btubes1.databinding.AddSeriesFragmentBinding;
 
 import java.util.ArrayList;
 
 public class AddSeriesFragment extends Fragment implements View.OnClickListener{
-    private AddFragmentBinding binding;
-    private FragmentPresenter presenter;
+    private AddSeriesFragmentBinding binding;
+    private FragmentCreate presenter;
     private DatabaseSeries db;
     private MoviesAdapter moviesAdapter;
     private StoragePresenter storagePresenter;
@@ -23,31 +24,39 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
     private String status;
     public AddSeriesFragment(){}
 
+    public static AddSeriesFragment newInstance() {
+        AddSeriesFragment fragment = new AddSeriesFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        this.binding = AddFragmentBinding.inflate(inflater, container, false);
+        this.binding = AddSeriesFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         mainActivity = new MainActivity();
-        presenter = new FragmentPresenter(this.getParentFragmentManager());
-        this.binding.rbMovie.setOnClickListener(this);
-        this.binding.rbSeries.setOnClickListener(this);
-        this.binding.addBtnSeries.setOnClickListener(this);
+        presenter = new FragmentCreate(this.getParentFragmentManager());
         this.storagePresenter = new StoragePresenter();
         this.db = new DatabaseSeries(getContext());
+        this.binding.addBtnSeries.setOnClickListener(this);
 
-        RadioGroup radioGroup = this.binding.radioGroupStatus;
+        RadioGroup radioGroup = this.binding.radioGroupStatusSeries;
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch(i){
-                    case R.id.rbDropped:
+                    case R.id.rbDroppedSeries:
                         status = "dropped";
                         break;
-                    case R.id.rbFinished:
+                    case R.id.rbFinishedSeries:
                         status = "finished";
                         break;
-                    case R.id.rbWaiting:
+                    case R.id.rbWaitingSeries:
                         status = "waiting list";
+                        break;
+                    case R.id.rbOngoing:
+                        status = "ongoing";
                         break;
                 }
             }
@@ -57,11 +66,8 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        if(view == this.binding.rbMovie){
-            this.binding.jumlahEpisodeSeries.setVisibility(View.GONE);
-        }else if(view == this.binding.rbSeries){
-            this.binding.jumlahEpisodeSeries.setVisibility(View.VISIBLE);
-        }else if(view == this.binding.addBtnMovie){
+        if(view == this.binding.addBtnSeries){
+            Log.d("test", "addbtnseries");
             Series series = new Series(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), status, Integer.parseInt(this.binding.etRating.getText().toString()), Integer.parseInt(this.binding.numEpisode.getText().toString()));
             db.addSeries(series.getTitle(), series.getSynopsis(), series.getRating(), series.getStatus(), series.getEpisode());
             presenter.createListFragmentSeries();

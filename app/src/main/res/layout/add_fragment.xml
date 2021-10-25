@@ -11,10 +11,8 @@
         android:textAlignment="center"
         android:textSize="30dp"
         android:id="@+id/tvAddMovie"
-        android:text="Add a movie or series :">
+        android:text="Add a movie:">
     </TextView>
-
-
 
     <LinearLayout
         android:id="@+id/layoutStatus"

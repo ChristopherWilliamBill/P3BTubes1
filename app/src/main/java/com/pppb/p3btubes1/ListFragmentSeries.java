@@ -20,6 +20,7 @@ public class ListFragmentSeries extends Fragment implements View.OnClickListener
     private Context context;
     private DatabaseSeries db;
     private ListFragmentSeriesPresenter SeriesPresenter;
+    private FragmentCreate fragmentPresenter;
 
 
     public ListFragmentSeries(){
@@ -49,12 +50,17 @@ public class ListFragmentSeries extends Fragment implements View.OnClickListener
 
         listView.setAdapter(this.adapter);
         this.SeriesPresenter.displayListSeries();
+
+        this.fragmentPresenter = new FragmentCreate(getParentFragmentManager());
+        this.binding.addButtonSeries.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onClick(View view) {
-
+        if(view == this.binding.addButtonSeries){
+            fragmentPresenter.createAddSeriesFragment();
+        }
     }
 
     @Override
