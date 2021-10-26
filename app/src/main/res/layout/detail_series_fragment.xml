@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="80dp">
+
+    <TextView
+        android:id="@+id/tvAddSeries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JUDUL SERIES"
+        android:textAlignment="center"
+        android:textSize="30dp"></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvAddSeries"
+        android:id="@+id/layoutTitleSeries"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvStatusSeries"
+            android:textSize="20dp"
+            android:layout_weight="0.8">
+        </TextView>
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/radioButtonStatusSeries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutTitleSeries"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rbWaitingSeries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="waiting list"/>
+        <RadioButton
+            android:id="@+id/rbCompleteSeries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="finished"/>
+        <RadioButton
+            android:id="@+id/rbDroppedSeries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dropped"/>
+        <RadioButton
+            android:id="@+id/rbOngoingSeries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ongoing"/>
+    </RadioGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:orientation="horizontal"
+        android:id="@+id/numEpisodeSeries"
+        android:layout_below="@+id/radioButtonStatusSeries"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="Current Episode :"
+            android:textSize="20dp">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etEpisode"
+            android:inputType="number">
+        </EditText>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/numEpisodeSeries"
+        android:weightSum="1"
+        android:id="@+id/layoutRatingSeries">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:text="Rating (1-5):"
+            android:textSize="20dp">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:id="@+id/etRatingSeries"
+            android:inputType="number"
+            android:maxLength="1"
+            android:digits="12345">
+        </EditText>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/layoutRatingSeries"
+        android:id="@+id/layoutSynopsis">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Synopsis :"
+            android:textSize="20dp">
+        </TextView>
+
+        <EditText
+            android:id="@+id/detailSynopsisSeries"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+        </EditText>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="save changes"
+        android:id="@+id/saveChangesSeries"
+        android:layout_margin="10dp">
+    </Button>
+
+</RelativeLayout>

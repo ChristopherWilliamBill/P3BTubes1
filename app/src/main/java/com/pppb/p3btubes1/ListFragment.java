@@ -13,14 +13,14 @@ import com.pppb.p3btubes1.databinding.ListFragmentBinding;
 
 import java.util.ArrayList;
 
-public class ListFragment extends Fragment implements View.OnClickListener, ListFragmentPresenter.Imovies{
+public class ListFragment extends Fragment implements View.OnClickListener, MainFragment.ListFragmentPresenter.Imovies{
 
     private ListFragmentBinding binding;
     private MoviesAdapter adapter;
     private FragmentCreate fragmentPresenter;
     private Context context;
     private StoragePresenter storagePresenter;
-    private ListFragmentPresenter listFragmentPresenter;
+    private MainFragment.ListFragmentPresenter listFragmentPresenter;
 //    private ArrayList<Movies> arrMovies;
     private DatabaseMovie db;
 
@@ -45,7 +45,7 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
         this.context = getContext();
 
         this.db = new DatabaseMovie(this.getActivity());
-        this.listFragmentPresenter = new ListFragmentPresenter(this.db, this);
+        this.listFragmentPresenter = new MainFragment.ListFragmentPresenter(this.db, this);
         this.adapter = new MoviesAdapter(this.getActivity(), getParentFragmentManager());
 
         listView.setAdapter(this.adapter);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -69,6 +70,22 @@ public class DatabaseSeries extends SQLiteOpenHelper {
         }
     }
 
+    public void updateSeries(String status, String synopsis, int rating, String id, int episodes){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_SYNOPSIS, synopsis);
+        cv.put(COLUMN_RATING, rating);
+        cv.put(COLUMN_STATUS, status);
+        cv.put(COLUMN_EPISODES, episodes);
+        Log.d("test", "" + id);
+
+        long result = db.update(TABLE_NAME_SERIES, cv, "id = ?", new String[]{id});
+        if(result == -1){
+            Toast.makeText(context, "Failed to update!", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully updated!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public Cursor readAllSeries(){
         String query = "SELECT * FROM " + TABLE_NAME_SERIES;

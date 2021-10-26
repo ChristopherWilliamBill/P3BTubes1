@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 
 import com.pppb.p3btubes1.databinding.MainFragmentBinding;
 
+import java.util.ArrayList;
+
 public class MainFragment extends Fragment implements View.OnClickListener{
     private MainFragmentBinding binding;
     private FragmentCreate presenter;
@@ -34,6 +36,54 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             presenter.createListFragment();
         }else if(view == this.binding.startBtnSeries){
             presenter.createListFragmentSeries();
+        }
+    }
+
+    public static class ListFragmentPresenter {
+        private ArrayList<Movies> movie;
+        private DatabaseMovie db;
+        public Imovies ui;
+
+        public ListFragmentPresenter(DatabaseMovie db, Imovies ui){
+            this.movie = new ArrayList<>();
+            this.db = db;
+            this.ui = ui;
+        }
+
+        public void displayListMovie(){
+            ArrayList<Movies> moviesArrayList = db.loadMovie();
+            this.movie.addAll(moviesArrayList);
+            this.ui.updateMovie(this.movie);
+        }
+
+        public interface Imovies{
+            void updateMovie(ArrayList<Movies> movie);
+            void detailMovie();
+            void addMovie();
+        }
+    }
+
+    public static class ListFragmentSeriesPresenter {
+        private ArrayList<Series> series;
+        private DatabaseSeries db;
+        public Iseries ui;
+
+        public ListFragmentSeriesPresenter(DatabaseSeries db, Iseries ui){
+            this.series = new ArrayList<>();
+            this.db = db;
+            this.ui = ui;
+        }
+
+        public void displayListSeries(){
+            ArrayList<Series> seriesArrayList = db.loadSeries();
+            this.series.addAll(seriesArrayList);
+            this.ui.updateSeries(this.series);
+        }
+
+        public interface Iseries{
+            void updateSeries(ArrayList<Series> series);
+            void detailSeries();
+            void addSeries();
         }
     }
 }

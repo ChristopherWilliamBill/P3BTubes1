@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
     private AddSeriesFragment addSeriesFragment;
     private FragmentCreate presenter;
     private FragmentManager fragmentManager;
+    private DetailSeriesFragment detailSeriesFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
         this.mainFragment = new MainFragment();
         this.addFragment = new AddFragment();
         this.addSeriesFragment = AddSeriesFragment.newInstance();
+        this.detailSeriesFragment = DetailSeriesFragment.newInstance("","" ,0, "", 0, 0 );
 
         //this.detailFragment = new DetailFragment(null);
 
@@ -68,6 +70,19 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
                 //Log.d("test", "" + index);
             }
         });
+        this.getSupportFragmentManager().setFragmentResultListener("seriesDetail", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                String title = result.getString("title");
+                String synopsis = result.getString("synopsis");
+                int rating  = result.getInt("rating");
+                String status  = result.getString("status");
+                int index = result.getInt("index");
+                int episodes = result.getInt("episode");
+                detailSeriesFragment = DetailSeriesFragment.newInstance(title, synopsis, rating, status, index, episodes);
+                //Log.d("test", "" + index);
+            }
+        });
 
     }
 
@@ -85,11 +100,11 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
         }else if(page == 5){
             ft.replace(this.binding.fragmentContainer.getId(), listFragmentSeries).addToBackStack(null);
         }else if(page == 6){
-            //ft.replace(this.binding.fragmentContainer.getId(), ).addToBackStack(null);
+            ft.replace(this.binding.fragmentContainer.getId(), detailSeriesFragment).addToBackStack(null);
         }else if(page == 7){
             ft.replace(this.binding.fragmentContainer.getId(), addSeriesFragment).addToBackStack(null);
         }
         ft.commit();
-        this.binding.drawerLayout.closeDrawers();
+        //this.binding.drawerLayout.closeDrawer();
     }
 }

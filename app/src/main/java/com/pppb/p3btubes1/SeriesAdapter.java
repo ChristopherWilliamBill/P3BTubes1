@@ -1,6 +1,7 @@
 package com.pppb.p3btubes1;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +88,7 @@ public class SeriesAdapter extends BaseAdapter {
         @Override
         public void onClick(View view) {
             if(view == this.binding.series){
+                Log.d("debug", "Masuk!");
                 fragmentPresenter.createDetailFragmentSeries(currentSeries);
             }
         }

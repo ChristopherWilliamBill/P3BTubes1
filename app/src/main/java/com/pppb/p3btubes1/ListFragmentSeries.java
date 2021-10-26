@@ -13,13 +13,13 @@ import com.pppb.p3btubes1.databinding.ListFragmentSeriesBinding;
 
 import java.util.ArrayList;
 
-public class ListFragmentSeries extends Fragment implements View.OnClickListener , ListFragmentSeriesPresenter.Iseries{
+public class ListFragmentSeries extends Fragment implements View.OnClickListener , MainFragment.ListFragmentSeriesPresenter.Iseries{
 
     private ListFragmentSeriesBinding binding;
     private SeriesAdapter adapter;
     private Context context;
     private DatabaseSeries db;
-    private ListFragmentSeriesPresenter SeriesPresenter;
+    private MainFragment.ListFragmentSeriesPresenter SeriesPresenter;
     private FragmentCreate fragmentPresenter;
 
 
@@ -39,13 +39,13 @@ public class ListFragmentSeries extends Fragment implements View.OnClickListener
         this.binding = ListFragmentSeriesBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         ListView listView = this.binding.lstSeries;
-        this.SeriesPresenter = new ListFragmentSeriesPresenter(this.db, this);
+        this.SeriesPresenter = new MainFragment.ListFragmentSeriesPresenter(this.db, this);
         binding.addButtonSeries.setOnClickListener(this);
 
         this.context = getContext();
 
         this.db = new DatabaseSeries(this.getActivity());
-        this.SeriesPresenter = new ListFragmentSeriesPresenter(this.db, this);
+        this.SeriesPresenter = new MainFragment.ListFragmentSeriesPresenter(this.db, this);
         this.adapter = new SeriesAdapter(this.getActivity(), getParentFragmentManager());
 
         listView.setAdapter(this.adapter);
