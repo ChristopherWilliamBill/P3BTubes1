@@ -43,6 +43,10 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
             this.binding.rbDropped.setChecked(true);
         }
 
+        this.binding.etRating.setText("" + currentMovie.getRating());
+        this.binding.detailSynopsis.setText("" + currentMovie.getSynopsis());
+
+
         this.db = new DatabaseMovie(getContext());
 
         RadioGroup radioGroup = this.binding.radioButtonStatus;

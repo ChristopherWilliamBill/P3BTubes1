@@ -105,6 +105,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
             ft.replace(this.binding.fragmentContainer.getId(), addSeriesFragment).addToBackStack(null);
         }
         ft.commit();
-        //this.binding.drawerLayout.closeDrawer();
+        this.binding.drawerLayout.closeDrawers();
     }
 }

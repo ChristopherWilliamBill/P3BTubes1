@@ -41,7 +41,7 @@ public class DetailSeriesFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         this.binding = DetailSeriesFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        this.id = this.getArguments().getInt("index", 0);
+        this.id = this.getArguments().getInt("index", 1);
         this.currentSeries = new Series(this.getArguments().getString("title", ""), this.getArguments().getString("synopsis", ""), this.getArguments().getString("status", ""), this.getArguments().getInt("rating", 0), this.getArguments().getInt("episodes", 0));
         Log.d("debug", currentSeries.getTitle());
         this.binding.tvAddSeries.setText(this.currentSeries.getTitle());
@@ -106,7 +106,7 @@ public class DetailSeriesFragment extends Fragment implements View.OnClickListen
         if(view == this.binding.saveChangesSeries){
             id++;
             this.db.updateSeries(status,this.binding.detailSynopsisSeries.getText().toString(),Integer.parseInt(this.binding.etRatingSeries.getText().toString()), id+"", Integer.parseInt(this.binding.etEpisode.getText().toString()));
-            fragmentPresenter.createListFragment();
+            fragmentPresenter.createListFragmentSeries();
         }
     }
 

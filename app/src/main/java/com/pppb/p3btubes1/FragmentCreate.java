@@ -49,13 +49,15 @@ public class FragmentCreate {
         fragmentManager.setFragmentResult("changePage", result);
     }
 
-    public void createDetailFragmentSeries(Series series){
+    public void createDetailFragmentSeries(Series series, int i){
         Bundle result = new Bundle();
         result.putString("title" , series.getTitle());
         result.putString("synopsis" , series.getSynopsis());
         result.putInt("rating" , series.getRating());
         result.putString("status" , series.getStatus());
         result.putInt("episode", series.getEpisode());
+        result.putInt("index" , i);
+
 
         result.putInt("page", 6);
         fragmentManager.setFragmentResult("seriesDetail", result);

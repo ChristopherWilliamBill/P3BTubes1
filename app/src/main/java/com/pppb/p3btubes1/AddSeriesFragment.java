@@ -48,15 +48,23 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
                 switch(i){
                     case R.id.rbDroppedSeries:
                         status = "dropped";
+                        binding.layoutRating.setVisibility(View.VISIBLE);
+                        binding.etRating.setText("");
                         break;
                     case R.id.rbFinishedSeries:
                         status = "finished";
+                        binding.layoutRating.setVisibility(View.VISIBLE);
+                        binding.etRating.setText("");
                         break;
                     case R.id.rbWaitingSeries:
                         status = "waiting list";
+                        binding.layoutRating.setVisibility(View.GONE);
+                        binding.etRating.setText("" + 0);
                         break;
                     case R.id.rbOngoing:
                         status = "ongoing";
+                        binding.layoutRating.setVisibility(View.VISIBLE);
+                        binding.etRating.setText("");
                         break;
                 }
             }
@@ -67,7 +75,6 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view == this.binding.addBtnSeries){
-            Log.d("test", "addbtnseries");
             Series series = new Series(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), status, Integer.parseInt(this.binding.etRating.getText().toString()), Integer.parseInt(this.binding.numEpisode.getText().toString()));
             db.addSeries(series.getTitle(), series.getSynopsis(), series.getRating(), series.getStatus(), series.getEpisode());
             presenter.createListFragmentSeries();
