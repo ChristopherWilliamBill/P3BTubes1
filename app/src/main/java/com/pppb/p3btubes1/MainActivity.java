@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
                 String status  = result.getString("status");
                 int index = result.getInt("index");
 
-                Movies currentMovie = new Movies(title,synopsis,rating, status);
+                Movies currentMovie = new Movies(title,synopsis,rating, status, null);
                 detailFragment = new DetailFragment(currentMovie, index);
                 //Log.d("test", "" + index);
             }

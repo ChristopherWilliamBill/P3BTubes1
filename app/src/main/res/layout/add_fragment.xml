@@ -122,10 +122,25 @@
         <EditText
             android:layout_width="match_parent"
             android:id="@+id/etSynopsis"
-            android:layout_height="200dp">
+            android:layout_height="100dp">
         </EditText>
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/ivPosterMovie"
+        android:layout_below="@+id/layoutSynopsis">
+    </ImageView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivPosterMovie"
+        android:text="AddImage"
+        android:id="@+id/btnAddImageMovie">
+    </Button>
 
     <Button
         android:layout_width="match_parent"

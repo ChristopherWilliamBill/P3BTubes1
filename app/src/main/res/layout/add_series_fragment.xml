@@ -160,10 +160,25 @@
         <EditText
             android:layout_width="match_parent"
             android:id="@+id/etSynopsis"
-            android:layout_height="200dp">
+            android:layout_height="100dp">
         </EditText>
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/ivPosterSeries"
+        android:layout_below="@+id/layoutSynopsis">
+    </ImageView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivPosterSeries"
+        android:text="AddImage"
+        android:id="@+id/btnAddImageSeries">
+    </Button>
 
     <Button
         android:layout_width="match_parent"

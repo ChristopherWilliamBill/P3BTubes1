@@ -5,11 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class DatabaseMovie extends SQLiteOpenHelper {
@@ -23,7 +25,9 @@ public class DatabaseMovie extends SQLiteOpenHelper {
     private static final String COLUMN_SYNOPSIS = "synopsis";
     private static final String COLUMN_RATING = "rating";
     private static final String COLUMN_STATUS = "status";
-
+    private static final String COLUMN_POSTER = "poster";
+    private ByteArrayOutputStream putPoster;
+    private byte[] posterInBytes;
 
     public DatabaseMovie(@Nullable Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -37,7 +41,8 @@ public class DatabaseMovie extends SQLiteOpenHelper {
                 + COLUMN_TITLE + " TEXT, "
                 + COLUMN_SYNOPSIS + " TEXT, "
                 + COLUMN_RATING + " INTEGER, "
-                + COLUMN_STATUS + " TEXT)";
+                + COLUMN_STATUS + " TEXT, "
+                + COLUMN_POSTER+ " BLOB)";
         db.execSQL(query);
     }
 
@@ -47,15 +52,18 @@ public class DatabaseMovie extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addMovie(String title, String synopsis, int rating, String status){
+    public void addMovie(String title, String synopsis, int rating, String status, Bitmap poster){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        this.putPoster = new ByteArrayOutputStream();
+        poster.compress(Bitmap.CompressFormat.JPEG,100, putPoster);
+        this.posterInBytes = putPoster.toByteArray();
 
         cv.put(COLUMN_TITLE, title);
         cv.put(COLUMN_SYNOPSIS, synopsis);
         cv.put(COLUMN_RATING, rating);
         cv.put(COLUMN_STATUS, status);
-
+        cv.put(COLUMN_POSTER, posterInBytes);
 
         long result = db.insert(TABLE_NAME_MOVIES, null, cv);
         if(result == -1){
@@ -133,10 +141,11 @@ public class DatabaseMovie extends SQLiteOpenHelper {
                 int rating = (cursor.getInt(3));
                 String status = (cursor.getString(4));
 
-                Movies movies = new Movies(title,synopsis,rating, status);
+                Movies movies = new Movies(title,synopsis,rating, status, null);
                 arrayList.add(movies);
             }
         }
         return arrayList;
     }
+
 }
