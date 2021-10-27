@@ -46,6 +46,11 @@ public class DetailSeriesFragment extends Fragment implements View.OnClickListen
         Log.d("debug", currentSeries.getTitle());
         this.binding.tvAddSeries.setText(this.currentSeries.getTitle());
         this.binding.tvStatusSeries.setText("Status: " + this.currentSeries.getStatus());
+        this.binding.etRatingSeries.setText("" + this.currentSeries.getRating());
+        this.binding.detailSynopsisSeries.setText(this.currentSeries.getSynopsis());
+        this.binding.etEpisode.setText("" + this.currentSeries.getEpisode());
+
+
 
         this.fragmentPresenter = new FragmentCreate(getParentFragmentManager());
         this.binding.saveChangesSeries.setOnClickListener(this);
@@ -62,6 +67,20 @@ public class DetailSeriesFragment extends Fragment implements View.OnClickListen
         }
 
         this.db = new DatabaseSeries(getContext());
+
+        if(this.binding.rbOngoingSeries.isChecked()){
+            binding.numEpisodeSeries.setVisibility(View.VISIBLE);
+        }
+
+        if(this.binding.rbOngoingSeries.isChecked()){
+            status = "ongoing";
+        }else if(this.binding.rbCompleteSeries.isChecked()){
+            status = "finished";
+        }else if(this.binding.rbDroppedSeries.isChecked()){
+            status = "dropped";
+        }else if(this.binding.rbWaitingSeries.isChecked()){
+            status = "waiting list";
+        }
 
         RadioGroup radioGroup = this.binding.radioButtonStatusSeries;
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -84,7 +103,6 @@ public class DetailSeriesFragment extends Fragment implements View.OnClickListen
                         binding.layoutRatingSeries.setVisibility(View.GONE);
                         binding.etRatingSeries.setText("" + 0);
                         binding.numEpisodeSeries.setVisibility(View.GONE);
-                        binding.etRatingSeries.setText("");
                         binding.etEpisode.setText("" + 0);
                         status = "waiting list";
                         break;
@@ -105,7 +123,7 @@ public class DetailSeriesFragment extends Fragment implements View.OnClickListen
     public void onClick(View view) {
         if(view == this.binding.saveChangesSeries){
             id++;
-            this.db.updateSeries(status,this.binding.detailSynopsisSeries.getText().toString(),Integer.parseInt(this.binding.etRatingSeries.getText().toString()), id+"", Integer.parseInt(this.binding.etEpisode.getText().toString()));
+            this.db.updateSeries(status,this.binding.detailSynopsisSeries.getText().toString(),Integer.parseInt(this.binding.etRatingSeries.getText().toString()), "" + id , Integer.parseInt(this.binding.etEpisode.getText().toString()));
             fragmentPresenter.createListFragmentSeries();
         }
     }

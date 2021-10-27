@@ -82,6 +82,7 @@ public class SeriesAdapter extends BaseAdapter {
             this.binding.indexSeries.setText(temp);
             this.binding.tvSeriesTitle.setText(series.getTitle());
             this.binding.tvSeriesStatus.setText(series.getStatus());
+            //this.binding.tvSeriesRating.setText(series.getEpisode());
             if(series.getRating() != 0) {
                 this.binding.tvSeriesRating.setText(series.getRating() + "/5");
             }
