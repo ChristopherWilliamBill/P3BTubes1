@@ -100,22 +100,24 @@
         <EditText
             android:id="@+id/detailSynopsis"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="wrap_content">
         </EditText>
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_below="@id/layoutSynopsis"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content">
         <ImageView
+            android:layout_centerHorizontal="true"
             android:id="@+id/posterMovie"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="250dp"
+            android:layout_height="350dp">
 
         </ImageView>
-    </LinearLayout>
+    </RelativeLayout>
 
     <Button
         android:layout_width="match_parent"
@@ -123,7 +125,7 @@
         android:layout_alignParentBottom="true"
         android:text="save changes"
         android:id="@+id/saveChangesMovie"
-        android:layout_margin="10dp">
+        android:layout_margin="5dp">
     </Button>
 
 </RelativeLayout>
