@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10207408896630334" />
         <entry key="app/src/main/res/layout/add_fragment.xml" value="0.5155061828721307" />
         <entry key="app/src/main/res/layout/add_series_fragment.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/detail_fragment.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/detail_fragment.xml" value="0.375" />
         <entry key="app/src/main/res/layout/left_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_fragment_series.xml" value="0.21014492753623187" />

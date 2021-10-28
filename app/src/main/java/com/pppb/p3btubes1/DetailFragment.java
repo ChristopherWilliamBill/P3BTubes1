@@ -1,6 +1,7 @@
 package com.pppb.p3btubes1;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         this.fragmentPresenter = new FragmentCreate(getParentFragmentManager());
         this.binding.saveChangesMovie.setOnClickListener(this);
 
+
+
         if(this.binding.status.getText().toString().equals("Status: waiting list" )){
             this.binding.rbWaiting.setChecked(true);
             binding.layoutRating.setVisibility(View.GONE);
@@ -43,8 +46,18 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
             this.binding.rbDropped.setChecked(true);
         }
 
+        if(this.binding.rbWaiting.isChecked()){
+            status = "waiting list";
+        }else if(this.binding.rbDropped.isChecked()){
+            status = "dropped";
+        }else if(this.binding.rbComplete.isChecked()){
+            status = "finished";
+        }
+
         this.binding.etRating.setText("" + currentMovie.getRating());
         this.binding.detailSynopsis.setText("" + currentMovie.getSynopsis());
+        //Log.d("test", currentMovie.getPoster().toString());
+        this.binding.posterMovie.setImageBitmap(currentMovie.getPoster());
 
 
         this.db = new DatabaseMovie(getContext());

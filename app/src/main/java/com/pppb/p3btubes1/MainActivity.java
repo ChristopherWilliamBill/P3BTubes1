@@ -1,5 +1,6 @@
 package com.pppb.p3btubes1;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -64,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
                 int rating  = result.getInt("rating");
                 String status  = result.getString("status");
                 int index = result.getInt("index");
-
-                Movies currentMovie = new Movies(title,synopsis,rating, status, null);
+                Bitmap poster = result.getParcelable("poster");
+                Movies currentMovie = new Movies(title,synopsis,rating, status, poster);
                 detailFragment = new DetailFragment(currentMovie, index);
                 //Log.d("test", "" + index);
             }

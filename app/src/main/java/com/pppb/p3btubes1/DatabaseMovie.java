@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -140,8 +141,10 @@ public class DatabaseMovie extends SQLiteOpenHelper {
                 String synopsis = (cursor.getString(2));
                 int rating = (cursor.getInt(3));
                 String status = (cursor.getString(4));
+                byte[] byteArray = cursor.getBlob(5);
+                Bitmap poster = BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
 
-                Movies movies = new Movies(title,synopsis,rating, status, null);
+                Movies movies = new Movies(title,synopsis,rating, status, poster);
                 arrayList.add(movies);
             }
         }

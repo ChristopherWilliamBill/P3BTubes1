@@ -37,6 +37,7 @@ public class FragmentCreate {
         result.putInt("rating" , movie.getRating());
         result.putInt("index" , i);
         result.putString("status" , movie.getStatus());
+        result.putParcelable("poster", movie.getPoster());
 
         result.putInt("page", 4);
         fragmentManager.setFragmentResult("movieDetail", result);

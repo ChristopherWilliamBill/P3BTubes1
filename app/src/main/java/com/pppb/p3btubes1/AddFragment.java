@@ -3,10 +3,12 @@ package com.pppb.p3btubes1;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,10 @@ import androidx.fragment.app.Fragment;
 import com.pppb.p3btubes1.databinding.AddFragmentBinding;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.util.ArrayList;
 
 public class AddFragment extends Fragment implements View.OnClickListener{
@@ -74,9 +80,17 @@ public class AddFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onActivityResult(ActivityResult result) {
                 Intent reply = result.getData();
-                Bundle extras = reply.getExtras();
-                Bitmap posterBitmap = (Bitmap) extras.get("data");
-                binding.ivPosterMovie.setImageBitmap(posterBitmap);
+                Uri uri = reply.getData();
+                Log.d("test", uri.toString());
+
+                try{
+                    Bitmap posterBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                    binding.ivPosterMovie.setImageBitmap(posterBitmap);
+                }catch(FileNotFoundException e){
+                    e.printStackTrace();
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
