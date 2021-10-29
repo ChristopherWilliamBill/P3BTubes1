@@ -39,6 +39,9 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             presenter.createListFragment();
         }else if(view == binding.btnListSeries){
             presenter.createListFragmentSeries();
+        }else if(view == binding.btnExit){
+            getActivity().moveTaskToBack(true);
+            getActivity().finish();
         }
     }
 }

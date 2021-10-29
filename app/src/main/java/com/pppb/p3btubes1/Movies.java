@@ -8,6 +8,17 @@ public class Movies {
     private String status;
     private int rating;
     private Bitmap poster;
+    private String id;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     public String getTitle() {
         return title;
@@ -49,12 +60,13 @@ public class Movies {
         this.poster = poster;
     }
 
-    public Movies(String title, String synopsis, int rating, String status, Bitmap poster){
+    public Movies(String title, String synopsis, int rating, String status, Bitmap poster, String id){
         this.title = title;
         this.synopsis = synopsis;
         this.rating = rating;
         this.status = status;
         this.poster = poster;
+        this.id = id;
     }
 
 

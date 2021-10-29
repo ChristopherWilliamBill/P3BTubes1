@@ -43,7 +43,7 @@ public class DatabaseMovie extends SQLiteOpenHelper {
                 + COLUMN_SYNOPSIS + " TEXT, "
                 + COLUMN_RATING + " INTEGER, "
                 + COLUMN_STATUS + " TEXT, "
-                + COLUMN_POSTER+ " BLOB)";
+                + COLUMN_POSTER + " BLOB)";
         db.execSQL(query);
     }
 
@@ -91,7 +91,6 @@ public class DatabaseMovie extends SQLiteOpenHelper {
         cv.put(COLUMN_STATUS, status);
         cv.put(COLUMN_SYNOPSIS, synopsis);
         cv.put(COLUMN_RATING, rating);
-        Log.d("test", "" + id);
 
         long result = db.update(TABLE_NAME_MOVIES, cv, "id = ?", new String[]{id});
         if(result == -1){
@@ -130,13 +129,21 @@ public class DatabaseMovie extends SQLiteOpenHelper {
 //        return currentMovie;
 //    }
 
-    public ArrayList<Movies> loadMovie(){
+    public ArrayList<Movies> loadMovie(boolean ascending, boolean sortRating){
         Cursor cursor = readAllMovie();
+        if(ascending) {
+            cursor = readAllMovieAZ();
+        }
+        if(sortRating){
+            cursor = readAllMovieRating();
+        }
+
         ArrayList<Movies> arrayList= new ArrayList<>();
         if(cursor.getCount() == 0){
             Toast.makeText(this.context, "No Movies!", Toast.LENGTH_SHORT).show();
         }else{
             while(cursor.moveToNext()){
+                String id = (cursor.getString(0));
                 String title = (cursor.getString(1));
                 String synopsis = (cursor.getString(2));
                 int rating = (cursor.getInt(3));
@@ -144,11 +151,35 @@ public class DatabaseMovie extends SQLiteOpenHelper {
                 byte[] byteArray = cursor.getBlob(5);
                 Bitmap poster = BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
 
-                Movies movies = new Movies(title,synopsis,rating, status, poster);
+                Movies movies = new Movies(title,synopsis,rating, status, poster, id);
                 arrayList.add(movies);
             }
         }
         return arrayList;
     }
+
+    public Cursor readAllMovieAZ(){
+        String query = "SELECT * FROM " + TABLE_NAME_MOVIES + " ORDER BY " + COLUMN_TITLE +  " ASC";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public Cursor readAllMovieRating(){
+        String query = "SELECT * FROM " + TABLE_NAME_MOVIES + " ORDER BY " + COLUMN_RATING +  " DESC";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+
 
 }

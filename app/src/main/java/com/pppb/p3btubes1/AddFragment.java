@@ -2,8 +2,6 @@ package com.pppb.p3btubes1;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,11 +20,8 @@ import androidx.fragment.app.Fragment;
 
 import com.pppb.p3btubes1.databinding.AddFragmentBinding;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
 import java.util.ArrayList;
 
 public class AddFragment extends Fragment implements View.OnClickListener{
@@ -102,7 +97,7 @@ public class AddFragment extends Fragment implements View.OnClickListener{
         if(view == this.binding.addBtnMovie){
             BitmapDrawable drawable = (BitmapDrawable) this.binding.ivPosterMovie.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
-            Movies movie = new Movies(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), Integer.parseInt(this.binding.etRating.getText().toString()), status, bitmap);
+            Movies movie = new Movies(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), Integer.parseInt(this.binding.etRating.getText().toString()), status, bitmap, "");
             databasePresenter.addMovie(movie.getTitle(), movie.getSynopsis(), movie.getRating(), movie.getStatus(), movie.getPoster());
 
 
@@ -111,7 +106,6 @@ public class AddFragment extends Fragment implements View.OnClickListener{
         else if(view == this.binding.btnAddImageMovie){
             Intent addPosterMovie = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
             if(addPosterMovie.resolveActivity(getActivity().getPackageManager()) != null){
-                addPosterMovie.putExtra("test", "test");
                 this.intentLauncher.launch(addPosterMovie);
             }
         }

@@ -160,14 +160,15 @@
         <EditText
             android:layout_width="match_parent"
             android:id="@+id/etSynopsis"
-            android:layout_height="100dp">
+            android:layout_height="wrap_content">
         </EditText>
 
     </LinearLayout>
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="180dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
         android:id="@+id/ivPosterSeries"
         android:layout_below="@+id/layoutSynopsis">
     </ImageView>
@@ -175,8 +176,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivPosterSeries"
-        android:text="AddImage"
+        android:layout_above="@+id/addBtnSeries"
+        android:layout_marginLeft="10dp"
+        android:text="Add Poster"
         android:id="@+id/btnAddImageSeries">
     </Button>
 
@@ -187,7 +189,8 @@
         android:textSize="30dp"
         android:text="@string/addNew"
         android:id="@+id/addBtnSeries"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
     </Button>
 
 </RelativeLayout>

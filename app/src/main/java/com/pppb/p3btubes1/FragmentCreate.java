@@ -30,12 +30,12 @@ public class FragmentCreate {
         fragmentManager.setFragmentResult("changePage", result);
     }
 
-    public void createDetailFragment(Movies movie, int i){
+    public void createDetailFragment(Movies movie){
         Bundle result = new Bundle();
         result.putString("title" , movie.getTitle());
         result.putString("synopsis" , movie.getSynopsis());
         result.putInt("rating" , movie.getRating());
-        result.putInt("index" , i);
+        result.putInt("index" , Integer.parseInt(movie.getId()));
         result.putString("status" , movie.getStatus());
         result.putParcelable("poster", movie.getPoster());
 
@@ -58,7 +58,7 @@ public class FragmentCreate {
         result.putString("status" , series.getStatus());
         result.putInt("episode", series.getEpisode());
         result.putInt("index" , i);
-
+        result.putParcelable("poster", series.getPoster());
 
         result.putInt("page", 6);
         fragmentManager.setFragmentResult("seriesDetail", result);

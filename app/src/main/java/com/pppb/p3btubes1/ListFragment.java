@@ -41,6 +41,8 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
         ListView listView = this.binding.lstMovie;
         this.fragmentPresenter = new FragmentCreate(getParentFragmentManager());
         binding.addButton.setOnClickListener(this);
+        this.binding.btnSortAZ.setOnClickListener(this);
+        this.binding.btnSortRating.setOnClickListener(this);
 
         this.context = getContext();
 
@@ -49,7 +51,8 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
         this.adapter = new MoviesAdapter(this.getActivity(), getParentFragmentManager());
 
         listView.setAdapter(this.adapter);
-        this.listFragmentPresenter.displayListMovie();
+        this.listFragmentPresenter.displayListMovie(false, false);
+        this.adapter.notifyDataSetChanged();
         return view;
     }
 
@@ -57,6 +60,10 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
     public void onClick(View view) {
         if (view == binding.addButton){
             fragmentPresenter.createAddFragment();
+        }else if(view == binding.btnSortAZ){
+            this.listFragmentPresenter.displayListMovie(true, false);
+        }else if(view == binding.btnSortRating){
+            this.listFragmentPresenter.displayListMovie(false, true);
         }
     }
 

@@ -53,6 +53,7 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
         this.storagePresenter = new StoragePresenter();
         this.db = new DatabaseSeries(getContext());
         this.binding.addBtnSeries.setOnClickListener(this);
+        this.binding.btnAddImageSeries.setOnClickListener(this);
 
         RadioGroup radioGroup = this.binding.radioGroupStatusSeries;
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -114,10 +115,9 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
             presenter.createListFragmentSeries();
         }
         else if(view == this.binding.btnAddImageSeries){
-            Intent addPosterMovie = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-            if(addPosterMovie.resolveActivity(getActivity().getPackageManager()) != null){
-                addPosterMovie.putExtra("test", "test");
-                this.intentLauncher.launch(addPosterMovie);
+            Intent addPosterSeries = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+            if(addPosterSeries.resolveActivity(getActivity().getPackageManager()) != null){
+                this.intentLauncher.launch(addPosterSeries);
             }
         }
     }

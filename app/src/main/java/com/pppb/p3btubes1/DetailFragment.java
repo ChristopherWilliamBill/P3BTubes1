@@ -19,9 +19,10 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     private String status;
     private FragmentCreate fragmentPresenter;
 
-    public DetailFragment(Movies currentMovie, int id){
+    public DetailFragment(Movies currentMovie){
         this.currentMovie = currentMovie;
-        this.id = id;
+        this.id = Integer.parseInt(currentMovie.getId());
+        Log.d("test" , "ID di detail fragment: " + id);
     }
 
     @Override
@@ -93,7 +94,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view == this.binding.saveChangesMovie){
-            id++;
+            Log.d("test", "onclick detail dapet id: " + id);
             this.db.updateMovie(status,this.binding.detailSynopsis.getText().toString(),Integer.parseInt(this.binding.etRating.getText().toString()),""+ id);
             fragmentPresenter.createListFragment();
         }

@@ -18,9 +18,10 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/P3BTubes1/app/src/main/res/layout/rating_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/P3BTubes1/app/src/main/res/layout/series_list.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10207408896630334" />
-        <entry key="app/src/main/res/layout/add_fragment.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/add_series_fragment.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/add_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/add_series_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/detail_fragment.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/detail_series_fragment.xml" value="0.2210144927536232" />
         <entry key="app/src/main/res/layout/left_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_fragment_series.xml" value="0.21014492753623187" />

@@ -36,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
+            android:id="@+id/btnSortAZ"
             android:text="A-Z">
         </Button>
 
@@ -44,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:layout_marginLeft="15dp"
+            android:id="@+id/btnSortRating"
             android:text="Rating ">
         </Button>
     </LinearLayout>

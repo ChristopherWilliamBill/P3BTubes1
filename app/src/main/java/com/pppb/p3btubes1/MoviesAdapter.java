@@ -1,6 +1,7 @@
 package com.pppb.p3btubes1;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class MoviesAdapter extends BaseAdapter {
 
         if(convertView == null){
             convertView = binding.getRoot();
-            viewHolder = new ViewHolder(binding, i , this.fm, this.getItem(i));
+            viewHolder = new ViewHolder(binding, i , this.fm, this.arrMovies.get(i));
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -64,32 +65,32 @@ public class MoviesAdapter extends BaseAdapter {
     private class ViewHolder implements View.OnClickListener{
         protected MoviesListBinding binding;
         private FragmentCreate fragmentPresenter;
-        private int i;
+        private String i;
         private String temp;
         private Movies currentMovie;
 
         public ViewHolder(MoviesListBinding binding, int i, FragmentManager fm, Movies m){
             this.binding = binding;
             this.fragmentPresenter = new FragmentCreate(fm);
-            this.i = i;
-            this.temp = "" + (i+1);
+            this.i = m.getId();
             this.binding.movie.setOnClickListener(this);
             this.currentMovie = m;
         }
 
         public void updateView(Movies movie){
-            this.binding.index.setText(temp + ". ");
+            this.binding.index.setText("" + i);
             this.binding.tvMovieTitle.setText(movie.getTitle());
             this.binding.tvMovieStatus.setText(movie.getStatus());
             if(movie.getRating() != 0){
                 this.binding.tvRating.setText(movie.getRating() + "/5");
             }
+            this.currentMovie = movie;
         }
 
         @Override
         public void onClick(View view) {
             if(view == this.binding.movie){
-                fragmentPresenter.createDetailFragment(currentMovie, i);
+                fragmentPresenter.createDetailFragment(currentMovie);
             }
         }
     }
