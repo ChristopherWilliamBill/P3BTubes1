@@ -1,4 +1,4 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.View;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,11 +18,13 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
+import com.pppb.p3btubes1.DatabaseMovie;
+import com.pppb.p3btubes1.Model.Movies;
+import com.pppb.p3btubes1.R;
 import com.pppb.p3btubes1.databinding.AddFragmentBinding;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class AddFragment extends Fragment implements View.OnClickListener{
     private AddFragmentBinding binding;

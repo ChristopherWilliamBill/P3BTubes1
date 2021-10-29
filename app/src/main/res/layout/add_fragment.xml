@@ -11,7 +11,7 @@
         android:textAlignment="center"
         android:textSize="30dp"
         android:id="@+id/tvAddMovie"
-        android:text="Add a movie:">
+        android:text="@string/add_a_movie">
     </TextView>
 
     <LinearLayout
@@ -27,8 +27,9 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:gravity="center_vertical"
-            android:text="Status: "
-            android:textSize="20dp"></TextView>
+            android:text="@string/status"
+            android:textSize="20dp">
+        </TextView>
 
         <RadioGroup
             android:id="@+id/radioGroupStatus"
@@ -40,19 +41,19 @@
                 android:id="@+id/rbFinished"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="finished" />
+                android:text="@string/finished" />
 
             <RadioButton
                 android:id="@+id/rbDropped"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="dropped" />
+                android:text="@string/dropped" />
 
             <RadioButton
                 android:id="@+id/rbWaiting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="waiting list" />
+                android:text="@string/waiting_list" />
         </RadioGroup>
     </LinearLayout>
 
@@ -67,7 +68,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title :"
+            android:text="@string/title"
             android:textSize="20dp"
             android:layout_weight="0.8">
         </TextView>
@@ -91,7 +92,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rating (1-5):"
+            android:text="@string/rating_1_5"
             android:textSize="20dp">
         </TextView>
 
@@ -115,7 +116,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Synopsis :"
+            android:text="@string/synopsis"
             android:textSize="20dp">
         </TextView>
 
@@ -139,7 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/addBtnMovie"
-        android:text="Add Poster"
+        android:text="@string/add_poster"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="0dp"
         android:id="@+id/btnAddImageMovie">

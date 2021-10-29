@@ -1,4 +1,4 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.View;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
+import com.pppb.p3btubes1.DatabaseMovie;
+import com.pppb.p3btubes1.Presenter.ListFragmentPresenter;
+import com.pppb.p3btubes1.Model.Movies;
 import com.pppb.p3btubes1.databinding.ListFragmentBinding;
 
 import java.util.ArrayList;

@@ -1,22 +1,22 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.Model;
 
 import android.graphics.Bitmap;
 
-public class Series {
+public class Movies {
     private String title;
     private String synopsis;
     private String status;
     private int rating;
-    private int episode;
     private Bitmap poster;
+    private String id;
 
-    public Series(String title, String synopsis, String status, int rating, int episode, Bitmap poster) {
-        this.title = title;
-        this.synopsis = synopsis;
-        this.status = status;
-        this.rating = rating;
-        this.episode = episode;
-        this.poster = poster;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 
@@ -32,16 +32,16 @@ public class Series {
         return synopsis;
     }
 
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
     }
 
     public int getRating() {
@@ -52,14 +52,6 @@ public class Series {
         this.rating = rating;
     }
 
-    public int getEpisode() {
-        return episode;
-    }
-
-    public void setEpisode(int episode) {
-        this.episode = episode;
-    }
-
     public Bitmap getPoster() {
         return poster;
     }
@@ -67,4 +59,15 @@ public class Series {
     public void setPoster(Bitmap poster) {
         this.poster = poster;
     }
+
+    public Movies(String title, String synopsis, int rating, String status, Bitmap poster, String id){
+        this.title = title;
+        this.synopsis = synopsis;
+        this.rating = rating;
+        this.status = status;
+        this.poster = poster;
+        this.id = id;
+    }
+
+
 }

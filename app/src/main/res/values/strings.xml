@@ -1,9 +1,37 @@
 <resources>
-    <string name="app_name">P3BTubes1</string>
+    <string name="app_name">Watchlist</string>
     <string name="welcome">Welcome!</string>
     <string name="start">Start</string>
     <string name="addNew">+</string>
     <string name="openDrawer">open drawer</string>
     <string name="closeDrawer">close drawer</string>
+    <string name="add_a_movie">Add a movie:</string>
+    <string name="add_a_series">Add a series:</string>
+    <string name="title">Title :</string>
+    <string name="status">Status:</string>
+    <string name="add_poster">Add Poster</string>
+    <string name="judul_film">JUDUL FILM</string>
+    <string name="judul_series">JUDUL SERIES</string>
+    <string name="waiting_list">waiting list</string>
+    <string name="finished">finished</string>
+    <string name="dropped">dropped</string>
+    <string name="ongoing">ongoing</string>
+    <string name="current_episode">Current Episode :</string>
+    <string name="rating_1_5">Rating (1-5):</string>
+    <string name="synopsis">Synopsis :</string>
+    <string name="save_changes">save changes</string>
+    <string name="movies">Movies :</string>
+    <string name="series">Series :</string>
+    <string name="sort_by">Sort By:</string>
+    <string name="a_z">A-Z</string>
+    <string name="rating">Rating</string>
+    <string name="search">Search</string>
+    <string name="what_are_you_watching_today">what are you watching today?</string>
+    <string name="movie">Movie</string>
+    <string name="series_main">Series</string>
+    <string name="home">Home</string>
+    <string name="movies_nav">Movies</string>
+    <string name="series_nav">Series</string>
+    <string name="exit">Exit</string>
 
 </resources>

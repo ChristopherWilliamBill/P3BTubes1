@@ -1,8 +1,11 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.View;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentManager;
+
+import com.pppb.p3btubes1.Model.Movies;
+import com.pppb.p3btubes1.Model.Series;
 
 public class FragmentCreate {
 

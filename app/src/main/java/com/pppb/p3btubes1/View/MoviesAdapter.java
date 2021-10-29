@@ -1,7 +1,6 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.View;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.widget.BaseAdapter;
 
 import androidx.fragment.app.FragmentManager;
 
+import com.pppb.p3btubes1.Model.Movies;
 import com.pppb.p3btubes1.databinding.MoviesListBinding;
 
 import java.util.ArrayList;

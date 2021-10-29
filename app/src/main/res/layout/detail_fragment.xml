@@ -9,7 +9,7 @@
         android:id="@+id/tvAddMovie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="JUDUL FILM"
+        android:text="@string/judul_film"
         android:textAlignment="center"
         android:textSize="30dp"></TextView>
 
@@ -40,17 +40,17 @@
             android:id="@+id/rbWaiting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="waiting list"/>
+            android:text="@string/waiting_list"/>
         <RadioButton
             android:id="@+id/rbComplete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="finished"/>
+            android:text="@string/finished"/>
         <RadioButton
             android:id="@+id/rbDropped"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dropped"/>
+            android:text="@string/dropped"/>
     </RadioGroup>
 
     <LinearLayout
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
-            android:text="Rating (1-5):"
+            android:text="@string/rating_1_5"
             android:textSize="20dp">
         </TextView>
 
@@ -93,7 +93,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Synopsis :"
+            android:text="@string/synopsis"
             android:textSize="20dp">
         </TextView>
 
@@ -123,7 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="save changes"
+        android:text="@string/save_changes"
         android:id="@+id/saveChangesMovie"
         android:layout_margin="5dp">
     </Button>

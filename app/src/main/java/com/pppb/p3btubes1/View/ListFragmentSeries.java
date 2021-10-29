@@ -1,8 +1,7 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.View;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,9 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
+import com.pppb.p3btubes1.DatabaseSeries;
+import com.pppb.p3btubes1.Presenter.ListFragmentSeriesPresenter;
+import com.pppb.p3btubes1.Model.Series;
 import com.pppb.p3btubes1.databinding.ListFragmentSeriesBinding;
 
 import java.util.ArrayList;

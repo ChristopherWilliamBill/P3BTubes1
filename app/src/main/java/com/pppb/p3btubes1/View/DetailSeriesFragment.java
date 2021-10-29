@@ -1,7 +1,6 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.View;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,9 @@ import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.pppb.p3btubes1.DatabaseSeries;
+import com.pppb.p3btubes1.Model.Series;
+import com.pppb.p3btubes1.R;
 import com.pppb.p3btubes1.databinding.DetailSeriesFragmentBinding;
 
 public class DetailSeriesFragment extends Fragment implements View.OnClickListener {

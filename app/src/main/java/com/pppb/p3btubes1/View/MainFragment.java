@@ -1,4 +1,4 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.View;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.pppb.p3btubes1.databinding.MainFragmentBinding;
-
-import java.util.ArrayList;
 
 public class MainFragment extends Fragment implements View.OnClickListener{
     private MainFragmentBinding binding;

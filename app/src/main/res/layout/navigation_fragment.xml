@@ -15,28 +15,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_Home"
-            android:text="Home">
+            android:text="@string/home">
         </Button>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_ListMovie"
-            android:text="Movies">
+            android:text="@string/movies_nav">
         </Button>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_ListSeries"
-            android:text="Series">
+            android:text="@string/series_nav">
         </Button>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_Exit"
-            android:text="Exit">
+            android:text="@string/exit">
         </Button>
 
     </LinearLayout>

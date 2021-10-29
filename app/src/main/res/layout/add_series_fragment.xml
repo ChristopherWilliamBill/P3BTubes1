@@ -11,7 +11,7 @@
         android:textAlignment="center"
         android:textSize="30dp"
         android:id="@+id/tvAddSeries"
-        android:text="Add a series:">
+        android:text="@string/add_a_series">
     </TextView>
 
     <LinearLayout
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title :"
+            android:text="@string/title"
             android:textSize="20dp"
             android:layout_weight="0.8">
         </TextView>
@@ -78,7 +78,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:gravity="center_vertical"
-            android:text="Status: "
+            android:text="@string/status"
             android:textSize="20dp"></TextView>
 
         <RadioGroup
@@ -92,28 +92,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
-                android:text="finished" />
+                android:text="@string/finished" />
 
             <RadioButton
                 android:id="@+id/rbDroppedSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
-                android:text="dropped" />
+                android:text="@string/dropped" />
 
             <RadioButton
                 android:id="@+id/rbWaitingSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
-                android:text="waiting list" />
+                android:text="@string/waiting_list" />
 
             <RadioButton
                 android:id="@+id/rbOngoing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
-                android:text="ongoing" />
+                android:text="@string/ongoing" />
         </RadioGroup>
     </LinearLayout>
 
@@ -129,7 +129,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rating (1-5):"
+            android:text="@string/rating_1_5"
             android:textSize="20dp">
         </TextView>
 
@@ -153,7 +153,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Synopsis :"
+            android:text="@string/synopsis"
             android:textSize="20dp">
         </TextView>
 
@@ -178,7 +178,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/addBtnSeries"
         android:layout_marginLeft="10dp"
-        android:text="Add Poster"
+        android:text="@string/add_poster"
         android:id="@+id/btnAddImageSeries">
     </Button>
 

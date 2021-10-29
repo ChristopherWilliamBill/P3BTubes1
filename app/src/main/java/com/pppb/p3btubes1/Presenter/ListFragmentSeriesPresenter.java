@@ -1,4 +1,7 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.Presenter;
+
+import com.pppb.p3btubes1.DatabaseSeries;
+import com.pppb.p3btubes1.Model.Series;
 
 import java.util.ArrayList;
 

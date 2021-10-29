@@ -1,4 +1,4 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.View;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +9,9 @@ import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.pppb.p3btubes1.DatabaseMovie;
+import com.pppb.p3btubes1.Model.Movies;
+import com.pppb.p3btubes1.R;
 import com.pppb.p3btubes1.databinding.DetailFragmentBinding;
 
 public class DetailFragment extends Fragment implements View.OnClickListener{

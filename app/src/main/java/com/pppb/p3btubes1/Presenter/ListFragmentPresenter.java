@@ -1,6 +1,7 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.Presenter;
 
-import android.util.Log;
+import com.pppb.p3btubes1.DatabaseMovie;
+import com.pppb.p3btubes1.Model.Movies;
 
 import java.util.ArrayList;
 

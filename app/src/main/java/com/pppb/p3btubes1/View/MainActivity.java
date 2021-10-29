@@ -1,4 +1,4 @@
-package com.pppb.p3btubes1;
+package com.pppb.p3btubes1.View;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.pppb.p3btubes1.Model.Movies;
+import com.pppb.p3btubes1.Model.Series;
+import com.pppb.p3btubes1.R;
 import com.pppb.p3btubes1.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements FragmentCreate.IMainActivity{
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
         setContentView(binding.getRoot());
 
         this.setSupportActionBar(this.binding.toolbar);
-        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this,this.binding.drawerLayout,this.binding.toolbar,R.string.openDrawer,R.string.closeDrawer);
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this,this.binding.drawerLayout,this.binding.toolbar, R.string.openDrawer,R.string.closeDrawer);
         abdt.syncState();
 
         this.listFragment = ListFragment.newInstance();
