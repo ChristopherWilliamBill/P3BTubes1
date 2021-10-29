@@ -5,11 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class DatabaseSeries extends SQLiteOpenHelper {
@@ -25,6 +28,9 @@ public class DatabaseSeries extends SQLiteOpenHelper {
     private static final String COLUMN_STATUS = "status";
     private static final String TABLE_NAME_SERIES = "series";
     private static final String COLUMN_EPISODES = "episodes";
+    private static final String COLUMN_POSTER = "poster";
+    private ByteArrayOutputStream putPoster;
+    private byte[] posterInBytes;
 
 
     public DatabaseSeries(@Nullable Context context){
@@ -40,7 +46,8 @@ public class DatabaseSeries extends SQLiteOpenHelper {
                 + COLUMN_SYNOPSIS + " TEXT, "
                 + COLUMN_RATING + " INTEGER, "
                 + COLUMN_STATUS + " TEXT, "
-                + COLUMN_EPISODES + " INTEGER)";
+                + COLUMN_EPISODES + " INTEGER, "
+                + COLUMN_POSTER + " BLOB)";
         db.execSQL(query);
     }
 
@@ -51,15 +58,19 @@ public class DatabaseSeries extends SQLiteOpenHelper {
     }
 
 
-    public void addSeries(String title, String synopsis, int rating, String status, int episodes){
+    public void addSeries(String title, String synopsis, int rating, String status, int episodes, Bitmap poster){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        this.putPoster = new ByteArrayOutputStream();
+        poster.compress(Bitmap.CompressFormat.JPEG,100, putPoster);
+        this.posterInBytes = putPoster.toByteArray();
 
         cv.put(COLUMN_TITLE, title);
         cv.put(COLUMN_SYNOPSIS, synopsis);
         cv.put(COLUMN_RATING, rating);
         cv.put(COLUMN_STATUS, status);
         cv.put(COLUMN_EPISODES, episodes);
+        cv.put(COLUMN_POSTER, posterInBytes);
 
 
         long result = db.insert(TABLE_NAME_SERIES, null, cv);
@@ -111,8 +122,10 @@ public class DatabaseSeries extends SQLiteOpenHelper {
                 int rating = (cursor.getInt(3));
                 String status = (cursor.getString(4));
                 int episode = (cursor.getInt(5));
+                byte[] byteArray = (cursor.getBlob(6));
+                Bitmap poster = BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
 
-                Series series = new Series(title, synopsis, status, rating, episode);
+                Series series = new Series(title, synopsis, status, rating, episode, poster);
                 arrayListSeries.add(series);
             }
         }

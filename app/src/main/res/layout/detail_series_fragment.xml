@@ -118,7 +118,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/layoutRatingSeries"
-        android:id="@+id/layoutSynopsis">
+        android:id="@+id/layoutSynopsisSeries">
 
         <TextView
             android:layout_width="match_parent"
@@ -130,10 +130,24 @@
         <EditText
             android:id="@+id/detailSynopsisSeries"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="wrap_content">
         </EditText>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/layoutSynopsisSeries"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/posterSeries"
+            android:layout_width="250dp"
+            android:layout_height="350dp">
+
+        </ImageView>
+    </RelativeLayout>
 
     <Button
         android:layout_width="match_parent"
@@ -141,7 +155,7 @@
         android:layout_alignParentBottom="true"
         android:text="save changes"
         android:id="@+id/saveChangesSeries"
-        android:layout_margin="10dp">
+        android:layout_margin="5dp">
     </Button>
 
 </RelativeLayout>

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
         this.mainFragment = new MainFragment();
         this.addFragment = new AddFragment();
         this.addSeriesFragment = AddSeriesFragment.newInstance();
-        this.detailSeriesFragment = DetailSeriesFragment.newInstance("","" ,0, "", 0, 0 );
+        //this.detailSeriesFragment = DetailSeriesFragment.newInstance("","" ,0, "", 0, 0,  );
 
         //this.detailFragment = new DetailFragment(null);
 
@@ -80,7 +80,10 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
                 String status  = result.getString("status");
                 int index = result.getInt("index");
                 int episodes = result.getInt("episode");
-                detailSeriesFragment = DetailSeriesFragment.newInstance(title, synopsis, rating, status, index, episodes);
+                Bitmap poster = result.getParcelable("poster");
+                Series currentSeries = new Series(title, synopsis, status, rating, episodes, poster);
+                detailSeriesFragment = new DetailSeriesFragment(currentSeries, index);
+                //detailSeriesFragment = DetailSeriesFragment.newInstance(title, synopsis, rating, status, index, episodes, poster);
                 //Log.d("test", "" + index);
             }
         });

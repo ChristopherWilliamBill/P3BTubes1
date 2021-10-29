@@ -1,16 +1,27 @@
 package com.pppb.p3btubes1;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import com.pppb.p3btubes1.databinding.AddSeriesFragmentBinding;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AddSeriesFragment extends Fragment implements View.OnClickListener{
@@ -22,6 +33,8 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
     private ArrayList<Series> arrayList;
     private MainActivity mainActivity;
     private String status;
+    private ActivityResultLauncher<Intent> intentLauncher;
+
     public AddSeriesFragment(){}
 
     public static AddSeriesFragment newInstance() {
@@ -69,15 +82,43 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
                 }
             }
         });
+
+        this.intentLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                Intent reply = result.getData();
+                Uri uri = reply.getData();
+                Log.d("test", uri.toString());
+
+                try{
+                    Bitmap posterBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                    binding.ivPosterSeries.setImageBitmap(posterBitmap);
+                }catch(FileNotFoundException e){
+                    e.printStackTrace();
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         return view;
     }
 
     @Override
     public void onClick(View view) {
         if(view == this.binding.addBtnSeries){
-            Series series = new Series(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), status, Integer.parseInt(this.binding.etRating.getText().toString()), Integer.parseInt(this.binding.numEpisode.getText().toString()));
-            db.addSeries(series.getTitle(), series.getSynopsis(), series.getRating(), series.getStatus(), series.getEpisode());
+            BitmapDrawable drawable = (BitmapDrawable) this.binding.ivPosterSeries.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            Series series = new Series(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), status, Integer.parseInt(this.binding.etRating.getText().toString()), Integer.parseInt(this.binding.numEpisode.getText().toString()), bitmap);
+            db.addSeries(series.getTitle(), series.getSynopsis(), series.getRating(), series.getStatus(), series.getEpisode(), series.getPoster());
             presenter.createListFragmentSeries();
+        }
+        else if(view == this.binding.btnAddImageSeries){
+            Intent addPosterMovie = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+            if(addPosterMovie.resolveActivity(getActivity().getPackageManager()) != null){
+                addPosterMovie.putExtra("test", "test");
+                this.intentLauncher.launch(addPosterMovie);
+            }
         }
     }
 }
