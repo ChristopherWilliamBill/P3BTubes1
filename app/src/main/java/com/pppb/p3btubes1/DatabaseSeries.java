@@ -110,8 +110,19 @@ public class DatabaseSeries extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<Series> loadSeries(){
+    public ArrayList<Series> loadSeries(boolean ascending, boolean sortRating, boolean isSearch, String search){
         Cursor cursor = readAllSeries();
+
+        if(ascending) {
+            cursor = readAllSeriesAZ();
+        }
+        if(sortRating){
+            cursor = readAllSeriesRating();
+        }
+        if (isSearch){
+            cursor = readAllSeriesSearch(search);
+        }
+
         ArrayList<Series> arrayListSeries= new ArrayList<>();
         if(cursor.getCount() == 0){
             Toast.makeText(this.context, "No Series!", Toast.LENGTH_SHORT).show();
@@ -130,5 +141,42 @@ public class DatabaseSeries extends SQLiteOpenHelper {
             }
         }
         return arrayListSeries;
+    }
+
+    public Cursor readAllSeriesAZ(){
+        String query = "SELECT * FROM " + TABLE_NAME_SERIES + " ORDER BY " + COLUMN_TITLE +  " ASC";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public Cursor readAllSeriesRating(){
+        String query = "SELECT * FROM " + TABLE_NAME_SERIES + " ORDER BY " + COLUMN_RATING +  " DESC";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public Cursor readAllSeriesSearch(String search){
+        String searchQuery = "'" + search + "%'";
+        String query = "SELECT * FROM " + TABLE_NAME_SERIES + " WHERE " + COLUMN_TITLE +  " LIKE " + searchQuery;
+
+        Log.d("search" , query);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
     }
 }

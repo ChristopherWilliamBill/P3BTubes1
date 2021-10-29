@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -19,9 +20,7 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
     private MoviesAdapter adapter;
     private FragmentCreate fragmentPresenter;
     private Context context;
-    private StoragePresenter storagePresenter;
     private ListFragmentPresenter listFragmentPresenter;
-//    private ArrayList<Movies> arrMovies;
     private DatabaseMovie db;
 
     public ListFragment(){
@@ -43,6 +42,8 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
         binding.addButton.setOnClickListener(this);
         this.binding.btnSortAZ.setOnClickListener(this);
         this.binding.btnSortRating.setOnClickListener(this);
+        this.binding.btnSearch.setOnClickListener(this);
+
 
         this.context = getContext();
 
@@ -51,7 +52,7 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
         this.adapter = new MoviesAdapter(this.getActivity(), getParentFragmentManager());
 
         listView.setAdapter(this.adapter);
-        this.listFragmentPresenter.displayListMovie(false, false);
+        this.listFragmentPresenter.displayListMovie(false, false, false, "");
         this.adapter.notifyDataSetChanged();
         return view;
     }
@@ -61,9 +62,13 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
         if (view == binding.addButton){
             fragmentPresenter.createAddFragment();
         }else if(view == binding.btnSortAZ){
-            this.listFragmentPresenter.displayListMovie(true, false);
+            this.listFragmentPresenter.displayListMovie(true, false, false, "");
         }else if(view == binding.btnSortRating){
-            this.listFragmentPresenter.displayListMovie(false, true);
+            this.listFragmentPresenter.displayListMovie(false, true, false, "");
+        }else if(view == binding.btnSearch){
+            this.listFragmentPresenter.displayListMovie(false, false, true, this.binding.etSearch.getText().toString());
+            InputMethodManager inputManager = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 
@@ -71,15 +76,5 @@ public class ListFragment extends Fragment implements View.OnClickListener, List
     public void updateMovie(ArrayList<Movies> movie) {
         adapter.updateMovie(movie);
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void detailMovie() {
-
-    }
-
-    @Override
-    public void addMovie() {
-
     }
 }

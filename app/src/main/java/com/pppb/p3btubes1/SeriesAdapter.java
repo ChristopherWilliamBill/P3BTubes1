@@ -52,7 +52,7 @@ public class SeriesAdapter extends BaseAdapter {
 
         if(convertView == null){
             convertView = binding.getRoot();
-            viewHolder = new ViewHolder(binding, i , this.fm, this.getItem(i));
+            viewHolder = new ViewHolder(binding, i , this.fm, this.arrSeries.get(i));
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -82,10 +82,11 @@ public class SeriesAdapter extends BaseAdapter {
             this.binding.indexSeries.setText(temp);
             this.binding.tvSeriesTitle.setText(series.getTitle());
             this.binding.tvSeriesStatus.setText(series.getStatus());
-            //this.binding.tvSeriesRating.setText(series.getEpisode());
             if(series.getRating() != 0) {
                 this.binding.tvSeriesRating.setText(series.getRating() + "/5");
             }
+            this.currentSeries = series;
+
         }
 
         @Override

@@ -14,19 +14,14 @@ public class ListFragmentPresenter {
         this.ui = ui;
     }
 
-    public void displayListMovie(boolean ascending, boolean rating) {
+    public void displayListMovie(boolean ascending, boolean rating, boolean isSearch, String search) {
         this.movie = new ArrayList<>();
-        ArrayList<Movies> moviesArrayList = db.loadMovie(ascending, rating);
+        ArrayList<Movies> moviesArrayList = db.loadMovie(ascending, rating, isSearch, search);
         this.movie.addAll(moviesArrayList);
         this.ui.updateMovie(this.movie);
-        Log.d("test", movie.get(0).getTitle());
     }
 
     public interface Imovies {
         void updateMovie(ArrayList<Movies> movie);
-
-        void detailMovie();
-
-        void addMovie();
     }
 }

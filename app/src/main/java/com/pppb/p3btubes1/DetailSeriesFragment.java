@@ -20,34 +20,17 @@ public class DetailSeriesFragment extends Fragment implements View.OnClickListen
     private String status;
     private FragmentCreate fragmentPresenter;
 
-    public DetailSeriesFragment(Series currentSeries, int id){
+    public DetailSeriesFragment(Series currentSeries, int id) {
         this.currentSeries = currentSeries;
         this.id = id;
     }
-
-//    public static DetailSeriesFragment newInstance(String title, String synopsis, int rating, String status, int index, int episodes, Bitmap poster){
-//        DetailSeriesFragment fragment = new DetailSeriesFragment();
-//        Bundle result = new Bundle();
-//        result.putString("title", title);
-//        result.putString("synopsis", synopsis);
-//        result.putInt("rating", rating);
-//        result.putString("status", status);
-//        result.putInt("index", index);
-//        result.putInt("episodes", episodes);
-//        result.putParcelable("poster", poster);
-//        fragment.setArguments(result);
-//
-//        return fragment;
-//    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         this.binding = DetailSeriesFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        //this.id = this.getArguments().getInt("index", 1);
-        //this.currentSeries = new Series(this.getArguments().getString("title", ""), this.getArguments().getString("synopsis", ""), this.getArguments().getString("status", ""), this.getArguments().getInt("rating", 0), this.getArguments().getInt("episodes", 0), this.getArguments().getParcelable("poster"));
-        //Log.d("debug", currentSeries.getTitle());
+
         this.binding.tvAddSeries.setText(this.currentSeries.getTitle());
         this.binding.tvStatusSeries.setText("Status: " + this.currentSeries.getStatus());
         this.binding.etRatingSeries.setText("" + this.currentSeries.getRating());

@@ -100,42 +100,17 @@ public class DatabaseMovie extends SQLiteOpenHelper {
         }
     }
 
-//    public Cursor readCurrentMovie(int index){
-//        String query = "SELECT * FROM " + TABLE_NAME_MOVIES + " WHERE " + COLUMN_ID + "==" + index+1;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        Cursor cursor = null;
-//        if(db != null){
-//            cursor = db.rawQuery(query, null);
-//        }
-//        return cursor;
-//    }
 
-//    public Movies loadCurrentMovie(int index){
-//        Cursor cursor = readCurrentMovie(index);
-//        Movies currentMovie = new Movies(null,null,0, "");
-//        if(cursor.getCount() == 0){
-//            Toast.makeText(this.context, "Failed!", Toast.LENGTH_SHORT).show();
-//        }else{
-//            while(cursor.moveToNext()) {
-//                String title = (cursor.getString(1));
-//                String synopsis = (cursor.getString(2));
-//                int rating = (cursor.getInt(3));
-//                String status = (cursor.getString(4));
-//
-//                currentMovie = new Movies(title, synopsis, rating, status);
-//            }
-//        }
-//        return currentMovie;
-//    }
-
-    public ArrayList<Movies> loadMovie(boolean ascending, boolean sortRating){
+    public ArrayList<Movies> loadMovie(boolean ascending, boolean sortRating, boolean isSearch, String search){
         Cursor cursor = readAllMovie();
         if(ascending) {
             cursor = readAllMovieAZ();
         }
         if(sortRating){
             cursor = readAllMovieRating();
+        }
+        if (isSearch){
+            cursor = readAllMovieSearch(search);
         }
 
         ArrayList<Movies> arrayList= new ArrayList<>();
@@ -171,6 +146,21 @@ public class DatabaseMovie extends SQLiteOpenHelper {
 
     public Cursor readAllMovieRating(){
         String query = "SELECT * FROM " + TABLE_NAME_MOVIES + " ORDER BY " + COLUMN_RATING +  " DESC";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public Cursor readAllMovieSearch(String search){
+        String searchQuery = "'" + search + "%'";
+        String query = "SELECT * FROM " + TABLE_NAME_MOVIES + " WHERE " + COLUMN_TITLE +  " LIKE " + searchQuery;
+
+        Log.d("search" , query);
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;

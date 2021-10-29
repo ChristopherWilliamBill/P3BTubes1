@@ -28,10 +28,6 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
     private AddSeriesFragmentBinding binding;
     private FragmentCreate presenter;
     private DatabaseSeries db;
-    private MoviesAdapter moviesAdapter;
-    private StoragePresenter storagePresenter;
-    private ArrayList<Series> arrayList;
-    private MainActivity mainActivity;
     private String status;
     private ActivityResultLauncher<Intent> intentLauncher;
 
@@ -48,9 +44,7 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         this.binding = AddSeriesFragmentBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        mainActivity = new MainActivity();
         presenter = new FragmentCreate(this.getParentFragmentManager());
-        this.storagePresenter = new StoragePresenter();
         this.db = new DatabaseSeries(getContext());
         this.binding.addBtnSeries.setOnClickListener(this);
         this.binding.btnAddImageSeries.setOnClickListener(this);

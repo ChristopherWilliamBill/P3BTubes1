@@ -40,9 +40,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
         this.mainFragment = new MainFragment();
         this.addFragment = new AddFragment();
         this.addSeriesFragment = AddSeriesFragment.newInstance();
-        //this.detailSeriesFragment = DetailSeriesFragment.newInstance("","" ,0, "", 0, 0,  );
-
-        //this.detailFragment = new DetailFragment(null);
 
         this.fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction ft = this.fragmentManager.beginTransaction();
@@ -68,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
                 Bitmap poster = result.getParcelable("poster");
                 Movies currentMovie = new Movies(title,synopsis,rating, status, poster, String.valueOf(index));
                 detailFragment = new DetailFragment(currentMovie);
-                //Log.d("test", "" + index);
             }
         });
         this.getSupportFragmentManager().setFragmentResultListener("seriesDetail", this, new FragmentResultListener() {
@@ -83,11 +79,8 @@ public class MainActivity extends AppCompatActivity implements FragmentCreate.IM
                 Bitmap poster = result.getParcelable("poster");
                 Series currentSeries = new Series(title, synopsis, status, rating, episodes, poster);
                 detailSeriesFragment = new DetailSeriesFragment(currentSeries, index);
-                //detailSeriesFragment = DetailSeriesFragment.newInstance(title, synopsis, rating, status, index, episodes, poster);
-                //Log.d("test", "" + index);
             }
         });
-
     }
 
     @Override

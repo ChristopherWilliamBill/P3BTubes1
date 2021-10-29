@@ -35,6 +35,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/btnSortAZSeries"
             android:layout_weight="0.3"
             android:text="A-Z">
         </Button>
@@ -42,6 +43,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/btnSortRatingSeries"
             android:layout_weight="0.3"
             android:layout_marginLeft="15dp"
             android:text="Rating ">
@@ -58,12 +60,14 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/etSearchSeries"
             android:layout_weight="0.9">
         </EditText>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/btnSearchSeries"
             android:layout_weight="0.1"
             android:text="Search">
         </Button>

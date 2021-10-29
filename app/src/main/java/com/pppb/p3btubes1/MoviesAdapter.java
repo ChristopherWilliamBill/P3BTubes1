@@ -78,7 +78,7 @@ public class MoviesAdapter extends BaseAdapter {
         }
 
         public void updateView(Movies movie){
-            this.binding.index.setText("" + i);
+            this.binding.index.setText(i + ".");
             this.binding.tvMovieTitle.setText(movie.getTitle());
             this.binding.tvMovieStatus.setText(movie.getStatus());
             if(movie.getRating() != 0){
