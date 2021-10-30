@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -104,11 +105,17 @@ public class AddSeriesFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view == this.binding.addBtnSeries){
-            BitmapDrawable drawable = (BitmapDrawable) this.binding.ivPosterSeries.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-            Series series = new Series(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), status, Integer.parseInt(this.binding.etRating.getText().toString()), Integer.parseInt(this.binding.numEpisode.getText().toString()), bitmap);
-            db.addSeries(series.getTitle(), series.getSynopsis(), series.getRating(), series.getStatus(), series.getEpisode(), series.getPoster());
-            presenter.createListFragmentSeries();
+            if(!this.binding.etRating.getText().toString().equalsIgnoreCase("") && !this.binding.etSynopsis.getText().toString().equalsIgnoreCase("") && !this.binding.etTitle.getText().toString().equalsIgnoreCase("") && !this.status.equalsIgnoreCase("") && this.binding.ivPosterSeries.getDrawable() != null && !this.binding.numEpisode.getText().toString().equalsIgnoreCase("")) {
+                BitmapDrawable drawable = (BitmapDrawable) this.binding.ivPosterSeries.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
+                Series series = new Series(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), status, Integer.parseInt(this.binding.etRating.getText().toString()), Integer.parseInt(this.binding.numEpisode.getText().toString()), bitmap);
+                db.addSeries(series.getTitle(), series.getSynopsis(), series.getRating(), series.getStatus(), series.getEpisode(), series.getPoster());
+                presenter.createListFragmentSeries();
+            }else{
+                Toast toast = Toast.makeText(getContext(), "All field is required", Toast.LENGTH_SHORT);
+                toast.show();
+
+            }
         }
         else if(view == this.binding.btnAddImageSeries){
             Intent addPosterSeries = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);

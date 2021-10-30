@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -110,9 +111,14 @@ public class DetailSeriesFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if(view == this.binding.saveChangesSeries){
-            id++;
-            this.db.updateSeries(status,this.binding.detailSynopsisSeries.getText().toString(),Integer.parseInt(this.binding.etRatingSeries.getText().toString()), "" + id , Integer.parseInt(this.binding.etEpisode.getText().toString()));
-            fragmentPresenter.createListFragmentSeries();
+            if(!this.binding.detailSynopsisSeries.getText().toString().equalsIgnoreCase("") && !this.binding.etRatingSeries.getText().toString().equalsIgnoreCase("") && !this.status.equalsIgnoreCase("")) {
+                id++;
+                this.db.updateSeries(status, this.binding.detailSynopsisSeries.getText().toString(), Integer.parseInt(this.binding.etRatingSeries.getText().toString()), "" + id, Integer.parseInt(this.binding.etEpisode.getText().toString()));
+                fragmentPresenter.createListFragmentSeries();
+            }else{
+                Toast toast = Toast.makeText(getContext(), "All field is required", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
 

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -91,13 +92,17 @@ public class AddFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view == this.binding.addBtnMovie){
-            BitmapDrawable drawable = (BitmapDrawable) this.binding.ivPosterMovie.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-            Movies movie = new Movies(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), Integer.parseInt(this.binding.etRating.getText().toString()), status, bitmap, "");
-            databasePresenter.addMovie(movie.getTitle(), movie.getSynopsis(), movie.getRating(), movie.getStatus(), movie.getPoster());
+            if(!this.binding.etRating.getText().toString().equalsIgnoreCase("") && !this.binding.etSynopsis.getText().toString().equalsIgnoreCase("") && !this.binding.etTitle.getText().toString().equalsIgnoreCase("") && !this.status.equalsIgnoreCase("") && this.binding.ivPosterMovie.getDrawable() != null) {
+                BitmapDrawable drawable = (BitmapDrawable) this.binding.ivPosterMovie.getDrawable();
+                Bitmap bitmap = drawable.getBitmap();
+                Movies movie = new Movies(this.binding.etTitle.getText().toString(), this.binding.etSynopsis.getText().toString(), Integer.parseInt(this.binding.etRating.getText().toString()), status, bitmap, "");
+                databasePresenter.addMovie(movie.getTitle(), movie.getSynopsis(), movie.getRating(), movie.getStatus(), movie.getPoster());
 
-
-            presenter.createListFragment();
+                presenter.createListFragment();
+            }else{
+                Toast toast = Toast.makeText(getContext(), "All field is required", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
         else if(view == this.binding.btnAddImageMovie){
             Intent addPosterMovie = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);

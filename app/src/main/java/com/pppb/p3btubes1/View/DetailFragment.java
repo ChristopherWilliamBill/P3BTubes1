@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -97,9 +98,13 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view == this.binding.saveChangesMovie){
-            Log.d("test", "onclick detail dapet id: " + id);
-            this.db.updateMovie(status,this.binding.detailSynopsis.getText().toString(),Integer.parseInt(this.binding.etRating.getText().toString()),""+ id);
-            fragmentPresenter.createListFragment();
+            if(!this.binding.detailSynopsis.getText().toString().equalsIgnoreCase("") && !this.binding.etRating.getText().toString().equalsIgnoreCase("") && !this.status.equalsIgnoreCase("")) {
+                this.db.updateMovie(status, this.binding.detailSynopsis.getText().toString(), Integer.parseInt(this.binding.etRating.getText().toString()), "" + id);
+                fragmentPresenter.createListFragment();
+            }else{
+                Toast toast = Toast.makeText(getContext(), "All field is required", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
 }
